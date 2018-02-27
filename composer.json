@@ -1,0 +1,36 @@
+{
+  "name": "codeinchq/lib-templates",
+  "version": "1.0.0",
+  "description": "A collection of templates",
+  "homepage": "https://github.com/codeinchq/lib-templates",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7"
+  },
+  "autoload": {
+    "psr-4": {"CodeInc\\Templates\\": "src/"}
+  },
+  "autoload-dev": {
+    "psr-4": { "CodeInc\\Templates\\Tests\\": "tests/" }
+  },
+  "authors": [
+    {
+      "name": "Joan Fabrégat",
+      "email": "joan@codeinc.fr",
+      "homepage": "https://www.codeinc.fr",
+      "role": "developer"
+    }
+  ],
+  "suggest": {
+    "codeinchq/lib-errordisplay": "A lib to render exceptions and errors into HTML or CLI"
+  },
+  "config": {
+    "preferred-install": {
+      "*": "dist"
+    }
+  }
+}
