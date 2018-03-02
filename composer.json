@@ -1,12 +1,12 @@
 {
   "name": "codeinchq/lib-templates",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A collection of templates",
   "homepage": "https://github.com/codeinchq/lib-templates",
   "type": "library",
   "license": "MIT",
   "require": {
-    "php": ">=7.2"
+    "php": ">=7.1"
   },
   "require-dev": {
     "phpunit/phpunit": "^7"
