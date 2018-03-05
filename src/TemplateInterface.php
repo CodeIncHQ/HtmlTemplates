@@ -32,14 +32,14 @@ interface TemplateInterface {
 	/**
 	 * Returns the template header HTML code
 	 *
-	 * @return string
+	 * @throws
 	 */
-	public function getHeader():string;
+	public function renderHeader():void;
 
 	/**
 	 * Returns the template footer HTML code
 	 *
-	 * @return string
+	 * @throws
 	 */
-	public function getFooter():string;
+	public function renderFooter():void;
 }

@@ -31,10 +31,9 @@ namespace CodeInc\Templates\Html;
 class BlankHtmlTemplate extends AbstractHtmlTemplate {
 	/**
 	 * @inheritdoc
-	 * @return string
 	 */
-	public function getHeader():string {
-		ob_start();
+	public function renderHeader():void
+	{
 		?>
 		<!DOCTYPE html>
 		<html lang="<?=htmlspecialchars($this->getLanguage())?>">
@@ -46,19 +45,16 @@ class BlankHtmlTemplate extends AbstractHtmlTemplate {
 
 			<body>
 		<?
-		return ob_get_clean();
 	}
 
 	/**
 	 * @inheritdoc
-	 * @return string
 	 */
-	public function getFooter():string {
-		ob_start();
+	public function renderFooter():void
+	{
 		?>
 			</body>
 		</html>
 		<?
-		return ob_get_clean();
 	}
 }
