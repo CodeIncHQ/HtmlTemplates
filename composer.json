@@ -1,8 +1,8 @@
 {
-  "name": "codeinchq/lib-templates",
-  "version": "1.0.2",
+  "name": "codeinc/lib-templates",
+  "version": "1.0.3",
   "description": "A collection of templates",
-  "homepage": "https://github.com/codeinchq/lib-templates",
+  "homepage": "https://github.com/CodeIncHQ/lib-templates",
   "type": "library",
   "license": "MIT",
   "require": {
@@ -26,7 +26,7 @@
     }
   ],
   "suggest": {
-    "codeinchq/lib-errordisplay": "A lib to render exceptions and errors into HTML or CLI"
+    "codeinc/lib-errordisplay": "A lib to render exceptions and errors into HTML or CLI"
   },
   "config": {
     "preferred-install": {
