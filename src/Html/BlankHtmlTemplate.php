@@ -17,9 +17,9 @@
 // Author:   Joan Fabrégat <joan@codeinc.fr>
 // Date:     20/02/2018
 // Time:     15:21
-// Project:  lib-templates
+// Project:  HtmlTemplates
 //
-namespace CodeInc\Templates\Html;
+namespace CodeInc\HtmlTemplates\Html;
 
 
 /**

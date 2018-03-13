@@ -17,10 +17,10 @@
 // Author:   Joan Fabrégat <joan@codeinc.fr>
 // Date:     20/02/2018
 // Time:     15:30
-// Project:  lib-templates
+// Project:  HtmlTemplates
 //
-namespace CodeInc\Templates\Html;
-use CodeInc\Templates\TemplateInterface;
+namespace CodeInc\HtmlTemplates\Html;
+use CodeInc\HtmlTemplates\TemplateInterface;
 
 
 /**
