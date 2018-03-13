@@ -1,8 +1,8 @@
 {
-  "name": "codeinc/lib-templates",
-  "version": "1.0.3",
+  "name": "codeinc/html-templates",
+  "version": "1.1.0",
   "description": "A collection of templates",
-  "homepage": "https://github.com/CodeIncHQ/lib-templates",
+  "homepage": "https://github.com/CodeIncHQ/HtmlTemplates",
   "type": "library",
   "license": "MIT",
   "require": {

@@ -17,9 +17,9 @@
 // Author:   Joan Fabrégat <joan@codeinc.fr>
 // Date:     20/02/2018
 // Time:     15:31
-// Project:  lib-templates
+// Project:  HtmlTemplates
 //
-namespace CodeInc\Templates;
+namespace CodeInc\HtmlTemplates;
 use Exception;
 use Throwable;
 
