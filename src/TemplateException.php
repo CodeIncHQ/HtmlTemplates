@@ -27,12 +27,13 @@ use Throwable;
 /**
  * Class TemplateException
  *
- * @package CodeInc\Templates
+ * @package CodeInc\HtmlTemplates
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class TemplateException extends Exception {
+class TemplateException extends Exception
+{
 	/**
-	 * @var TemplateInterface|null
+	 * @var HtmlTemplateInterface|null
 	 */
 	private $template;
 
@@ -40,18 +41,22 @@ class TemplateException extends Exception {
 	 * TemplateException constructor.
 	 *
 	 * @param string $message
-	 * @param TemplateInterface|null $template
+	 * @param HtmlTemplateInterface|null $template
 	 * @param null|Throwable $previous
 	 */
-	public function __construct(string $message, ?TemplateInterface $template = null, ?Throwable $previous = null) {
+	public function __construct(string $message,
+        ?HtmlTemplateInterface $template = null,
+        ?Throwable $previous = null)
+    {
 		$this->template = $template;
 		parent::__construct($message, $previous);
 	}
 
 	/**
-	 * @return TemplateInterface|null
+	 * @return HtmlTemplateInterface|null
 	 */
-	public function getTemplate():?TemplateInterface {
+	public function getTemplate():?HtmlTemplateInterface
+    {
 		return $this->template;
 	}
 }
