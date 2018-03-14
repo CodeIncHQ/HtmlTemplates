@@ -12,10 +12,10 @@
     "phpunit/phpunit": "^7"
   },
   "autoload": {
-    "psr-4": {"CodeInc\\Templates\\": "src/"}
+    "psr-4": {"CodeInc\\HtmlTemplates\\": "src/"}
   },
   "autoload-dev": {
-    "psr-4": { "CodeInc\\Templates\\Tests\\": "tests/" }
+    "psr-4": { "CodeInc\\HtmlTemplates\\Tests\\": "tests/" }
   },
   "authors": [
     {
