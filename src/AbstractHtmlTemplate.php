@@ -19,17 +19,17 @@
 // Time:     15:30
 // Project:  HtmlTemplates
 //
-namespace CodeInc\HtmlTemplates\Html;
-use CodeInc\HtmlTemplates\TemplateInterface;
+namespace CodeInc\HtmlTemplates;
 
 
 /**
  * Class AbstractHtmlTemplate
  *
- * @package CodeInc\Templates\Html
+ * @package CodeInc\HtmlTemplates
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-abstract class AbstractHtmlTemplate implements TemplateInterface {
+abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
+{
 	use HtmlHeadersTrait;
 	public const DEFAULT_CHARSET = "UTF-8";
 	public const DEFAULT_LANGUAGE = "en-US";
@@ -60,42 +60,48 @@ abstract class AbstractHtmlTemplate implements TemplateInterface {
 	 *
 	 * @return null|string
 	 */
-	public function getTitle():?string {
+	public function getTitle():?string
+    {
 		return $this->title;
 	}
 
 	/**
 	 * @param string $title
 	 */
-	public function setTitle(string $title):void {
+	public function setTitle(string $title):void
+    {
 		$this->title = $title;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getCharset():string {
+	public function getCharset():string
+    {
 		return $this->charset;
 	}
 
 	/**
 	 * @param string $htmlCharset
 	 */
-	public function setCharset(string $htmlCharset):void {
+	public function setCharset(string $htmlCharset):void
+    {
 		$this->charset = $htmlCharset;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getLanguage():string {
+	public function getLanguage():string
+    {
 		return $this->language;
 	}
 
 	/**
 	 * @param string $language
 	 */
-	public function setLanguage(string $language):void {
+	public function setLanguage(string $language):void
+    {
 		$this->language = $language;
 	}
 }

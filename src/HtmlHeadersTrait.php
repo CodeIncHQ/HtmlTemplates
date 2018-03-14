@@ -19,16 +19,17 @@
 // Time:     20:55
 // Project:  HtmlTemplates
 //
-namespace CodeInc\HtmlTemplates\Html;
+namespace CodeInc\HtmlTemplates;
 
 
 /**
  * Trait HtmlHeadersTrait
  *
- * @package CodeInc\Templates\Html
+ * @package CodeInc\HtmlTemplates
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-trait HtmlHeadersTrait {
+trait HtmlHeadersTrait
+{
 	/**
 	 * Global headers
 	 *
@@ -53,7 +54,9 @@ trait HtmlHeadersTrait {
 	 */
 	public function addHtmlCssHeader(string $url):void
 	{
-		$this->addHtmlHeader('<link rel="stylesheet" type="text/css" href="'.htmlspecialchars($url).'">');
+		$this->addHtmlHeader(
+		    '<link rel="stylesheet" type="text/css" href="'.htmlspecialchars($url).'">'
+        );
 	}
 
 	/**
@@ -73,7 +76,9 @@ trait HtmlHeadersTrait {
 	 * @param string|null $integrity
 	 * @param string|null $crossorigin
 	 */
-	public function addHtmlJsHeader(string $url, ?string $integrity = null, ?string $crossorigin = null):void {
+	public function addHtmlJsHeader(string $url, ?string $integrity = null,
+        ?string $crossorigin = null):void
+    {
 		$tag = '<script src="'.htmlspecialchars($url).'"';
 		if ($integrity) {
 			$tag .= ' integrity="'.htmlspecialchars($integrity).'"';
@@ -113,6 +118,8 @@ trait HtmlHeadersTrait {
 	 */
 	public function getHtmlHeadersAsString(string $glue = null):?string
 	{
-		return $this->htmlHeaders ? implode($glue ?: "\n", $this->htmlHeaders) : null;
+		return $this->htmlHeaders
+            ? implode($glue ?: "\n", $this->htmlHeaders)
+            : null;
 	}
 }
