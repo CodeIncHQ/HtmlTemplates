@@ -16,45 +16,31 @@
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
 // Date:     20/02/2018
-// Time:     15:21
+// Time:     14:46
 // Project:  HtmlTemplates
 //
-namespace CodeInc\HtmlTemplates\Html;
+namespace CodeInc\HtmlTemplates;
 
 
 /**
- * Class BlankHtmlTemplate
+ * Interface HtmlTemplateInterface
  *
- * @package CodeInc\Templates\Html
+ * @package CodeInc\HtmlTemplates
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class BlankHtmlTemplate extends AbstractHtmlTemplate {
+interface HtmlTemplateInterface
+{
 	/**
-	 * @inheritdoc
+	 * Returns the template header HTML code
+	 *
+	 * @throws
 	 */
-	public function renderHeader():void
-	{
-		?>
-		<!DOCTYPE html>
-		<html lang="<?=htmlspecialchars($this->getLanguage())?>">
-			<head>
-				<meta charset="<?=htmlspecialchars($this->getCharset())?>">
-				<title><?=htmlspecialchars($this->getTitle())?></title>
-				<?=$this->getHtmlHeadersAsString()?>
-			</head>
-
-			<body>
-		<?
-	}
+	public function renderHeader():void;
 
 	/**
-	 * @inheritdoc
+	 * Returns the template footer HTML code
+	 *
+	 * @throws
 	 */
-	public function renderFooter():void
-	{
-		?>
-			</body>
-		</html>
-		<?
-	}
+	public function renderFooter():void;
 }

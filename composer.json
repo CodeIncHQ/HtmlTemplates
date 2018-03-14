@@ -1,6 +1,6 @@
 {
   "name": "codeinc/html-templates",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A collection of templates",
   "homepage": "https://github.com/CodeIncHQ/HtmlTemplates",
   "type": "library",
@@ -12,10 +12,10 @@
     "phpunit/phpunit": "^7"
   },
   "autoload": {
-    "psr-4": {"CodeInc\\Templates\\": "src/"}
+    "psr-4": {"CodeInc\\HtmlTemplates\\": "src/"}
   },
   "autoload-dev": {
-    "psr-4": { "CodeInc\\Templates\\Tests\\": "tests/" }
+    "psr-4": { "CodeInc\\HtmlTemplates\\Tests\\": "tests/" }
   },
   "authors": [
     {
