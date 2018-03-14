@@ -1,14 +1,14 @@
 # HTML templates
 
-A collection of templates, mostly in HTML, coded in PHP 7.2.
+A collection of HTML templates wirtten in PHP 7.
 
 
 ## Installation
 
-This library is available through [Packagist](https://packagist.org/packages/codeinchq/html-templates) and can be installed using [Composer](https://getcomposer.org/): 
+This library is available through [Packagist](https://packagist.org/packages/codeinc/html-templates) and can be installed using [Composer](https://getcomposer.org/): 
 
 ```bash
-composer require codeinchq/html-templates
+composer require codeinc/html-templates
 ```
 
 ## License
