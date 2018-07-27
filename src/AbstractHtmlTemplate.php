@@ -116,7 +116,9 @@ abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
             return $this->getHtml();
         }
         catch (\Throwable $exception) {
-            return (string)new HtmlErrorRenderer($exception);
+            return (string)new HtmlErrorRenderer(
+                new TemplateException(_("Error while rendering the HTML template"), $this, $exception)
+            );
         }
     }
 }

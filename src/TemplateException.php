@@ -45,9 +45,7 @@ class TemplateException extends Exception
 	 * @param HtmlTemplateInterface|null $template
 	 * @param null|Throwable $previous
 	 */
-	public function __construct(string $message,
-        ?HtmlTemplateInterface $template = null,
-        ?Throwable $previous = null)
+	public function __construct(string $message, ?HtmlTemplateInterface $template = null, ?Throwable $previous = null)
     {
 		$this->template = $template;
 		parent::__construct($message, $previous);
