@@ -116,10 +116,10 @@ trait HtmlHeadersTrait
 	 * @param string|null $glue
 	 * @return null|string
 	 */
-	public function getHtmlHeadersAsString(string $glue = null):?string
+	public function getHtmlHeadersAsString(string $glue = "\n"):?string
 	{
 		return $this->htmlHeaders
-            ? implode($glue ?: "\n", $this->htmlHeaders)
+            ? implode($glue, $this->htmlHeaders)
             : null;
 	}
 }
