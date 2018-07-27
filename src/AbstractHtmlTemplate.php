@@ -113,7 +113,7 @@ abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
     public function __toString():string
     {
         try {
-            return $this->get();
+            return $this->getHtml();
         }
         catch (\Throwable $exception) {
             return (string)new HtmlErrorRenderer($exception);

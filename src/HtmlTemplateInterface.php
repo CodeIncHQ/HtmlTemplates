@@ -34,12 +34,12 @@ interface HtmlTemplateInterface
      *
      * @return string
      */
-    public function get():string;
+    public function getHtml():string;
 
     /**
      * Alias of get().
      *
-     * @see HtmlTemplateInterface::get()
+     * @see HtmlTemplateInterface::getHtml()
      * @return string
      */
     public function __toString():string;

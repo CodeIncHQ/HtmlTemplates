@@ -82,7 +82,7 @@ abstract class AbstractStringContentHtmlTemplate extends AbstractHtmlTemplate
      * @inheritdoc
      * @return string
      */
-    public function get():string
+    public function getHtml():string
     {
         return $this->getHeader().$this->getContent().$this->getFooter();
     }
