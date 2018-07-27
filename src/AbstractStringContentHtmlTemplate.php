@@ -3,7 +3,7 @@
 // +---------------------------------------------------------------------+
 // | CODE INC. SOURCE CODE                                               |
 // +---------------------------------------------------------------------+
-// | Copyright (c) 2019 - Code Inc. SAS - All Rights Reserved.           |
+// | Copyright (c) 2018 - Code Inc. SAS - All Rights Reserved.           |
 // | Visit https://www.codeinc.fr for more information about licensing.  |
 // +---------------------------------------------------------------------+
 // | NOTICE:  All information contained herein is, and remains the       |
@@ -15,32 +15,75 @@
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     20/02/2018
-// Time:     14:46
+// Date:     27/07/2018
 // Project:  HtmlTemplates
 //
+
 namespace CodeInc\HtmlTemplates;
 
+
 /**
- * Interface HtmlTemplateInterface
+ * Class AbstractStringContentHtmlTemplate
  *
  * @package CodeInc\HtmlTemplates
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-interface HtmlTemplateInterface
+abstract class AbstractStringContentHtmlTemplate extends AbstractHtmlTemplate
 {
     /**
-     * Returns the full template including the header and the footer.
+     * Page's content.
      *
-     * @return string
+     * @var string|null
      */
-    public function get():string;
+    private $content;
 
     /**
-     * Alias of get().
+     * Return's the header HTML coder
      *
-     * @see HtmlTemplateInterface::get()
      * @return string
      */
-    public function __toString():string;
+    abstract protected function getHeader():string;
+
+    /**
+     * Returns the footer HTML code.
+     *
+     * @return string
+     */
+    abstract protected function getFooter():string;
+
+    /**
+     * @inheritdoc
+     * @param string $content
+     */
+    public function addContent(string $content):void
+    {
+        $this->content .= $content;
+    }
+
+    /**
+     * @inheritdoc
+     * @param string $content
+     */
+    public function setContent(string $content):void
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * @inheritdoc
+     * @return null|string
+     */
+    public function getContent():?string
+    {
+        return $this->content;
+    }
+
+    /**
+     * @inheritdoc
+     * @return string
+     */
+    public function get():string
+    {
+        return $this->getHeader().$this->getContent().$this->getFooter();
+    }
 }

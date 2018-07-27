@@ -20,6 +20,7 @@
 // Project:  HtmlTemplates
 //
 namespace CodeInc\HtmlTemplates;
+use CodeInc\HtmlTemplates\HtmlTemplateInterface;
 use Exception;
 use Throwable;
 
