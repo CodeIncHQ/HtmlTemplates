@@ -1,7 +1,7 @@
 {
   "name": "codeinc/html-templates",
   "version": "2.0.0",
-  "description": "A collection of templates",
+  "description": "A collection of HTML templates",
   "homepage": "https://github.com/CodeIncHQ/HtmlTemplates",
   "type": "library",
   "license": "MIT",
