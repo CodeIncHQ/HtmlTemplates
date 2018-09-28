@@ -3,7 +3,7 @@
 // +---------------------------------------------------------------------+
 // | CODE INC. SOURCE CODE                                               |
 // +---------------------------------------------------------------------+
-// | Copyright (c) 2019 - Code Inc. SAS - All Rights Reserved.           |
+// | Copyright (c) 2018 - Code Inc. SAS - All Rights Reserved.           |
 // | Visit https://www.codeinc.fr for more information about licensing.  |
 // +---------------------------------------------------------------------+
 // | NOTICE:  All information contained herein is, and remains the       |
@@ -15,33 +15,29 @@
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     20/02/2018
-// Time:     14:46
+// Date:     28/09/2018
 // Project:  HtmlTemplates
 //
-namespace CodeInc\HtmlTemplates;
-use CodeInc\HtmlTemplates\HtmlHeaders\HtmlHeaders;
-
+declare(strict_types=1);
+namespace CodeInc\HtmlTemplates\HtmlHeaders;
 
 /**
- * Interface HtmlTemplateInterface
+ * Class HtmlHeadersException
  *
- * @package CodeInc\HtmlTemplates
+ * @package CodeInc\HtmlTemplates\HtmlHeaders
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-interface HtmlTemplateInterface
+class HtmlHeadersException extends \Exception
 {
-    /**
-     * Returns the object in charge of managing the HTML headers.
-     *
-     * @return HtmlHeaders
-     */
-    public function getHeaders():HtmlHeaders;
+    public const CODE_NOT_A_HEADER = 1;
 
     /**
-     * Returns the full generated HTML page.
-     *
-     * @return string
+     * @param $item
+     * @return HtmlHeadersException
      */
-    public function getHtml():string;
+    public static function notAnHeader($item):self
+    {
+        return new self(sprintf("The list item '%s' is not a string an can not be used as an header.",
+            is_object($item) ? get_class($item) : (string)$item), self::CODE_NOT_A_HEADER);
+    }
 }

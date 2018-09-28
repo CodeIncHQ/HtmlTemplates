@@ -28,22 +28,23 @@ namespace CodeInc\HtmlTemplates;
  * @package CodeInc\HtmlTemplates
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class BlankHtmlTemplate extends AbstractStringContentHtmlTemplate
+class BlankHtmlTemplate extends AbstractSingleContentHtmlTemplate
 {
     /**
      * @inheritdoc
      * @return string
      */
-	protected function getHeader():string
+	protected function getHtmlHeader():string
 	{
+	    $lang = $this->getLanguage();
 	    ob_start();
 		?>
 		<!DOCTYPE html>
-		<html lang="<?=htmlspecialchars($this->getLanguage())?>">
+		<html<?=$lang ? ' lang="'.htmlspecialchars($lang).'"' : ''?>>
 			<head>
 				<meta charset="<?=htmlspecialchars($this->getCharset())?>">
 				<title><?=htmlspecialchars($this->getTitle())?></title>
-				<?=$this->getHtmlHeadersAsString()?>
+				<?=$this->getHeaders()->getAsString()?>
 			</head>
 
 			<body>
@@ -55,7 +56,7 @@ class BlankHtmlTemplate extends AbstractStringContentHtmlTemplate
      * @inheritdoc
      * @return string
      */
-	public function getFooter():string
+	public function getHtmlFooter():string
 	{
 	    ob_start();
 		?>

@@ -1,6 +1,6 @@
 {
   "name": "codeinc/html-templates",
-  "version": "2.0.0",
+  "version": "3.0.0-dev",
   "description": "A collection of HTML templates",
   "homepage": "https://github.com/CodeIncHQ/HtmlTemplates",
   "type": "library",

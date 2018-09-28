@@ -3,59 +3,50 @@
 // +---------------------------------------------------------------------+
 // | CODE INC. SOURCE CODE                                               |
 // +---------------------------------------------------------------------+
-// | Copyright (c) 2017 - Code Inc. SAS - All Rights Reserved.           |
+// | Copyright (c) 2018 - Code Inc. SAS - All Rights Reserved.           |
 // | Visit https://www.codeinc.fr for more information about licensing.  |
 // +---------------------------------------------------------------------+
 // | NOTICE:  All information contained herein is, and remains the       |
 // | property of Code Inc. SAS. The intellectual and technical concepts  |
 // | contained herein are proprietary to Code Inc. SAS are protected by  |
 // | trade secret or copyright law. Dissemination of this information or |
-// | reproduction of this material  is strictly forbidden unless prior   |
+// | reproduction of this material is strictly forbidden unless prior    |
 // | written permission is obtained from Code Inc. SAS.                  |
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     20/02/2018
-// Time:     15:31
+// Date:     28/09/2018
 // Project:  HtmlTemplates
 //
+declare(strict_types=1);
 namespace CodeInc\HtmlTemplates;
-use CodeInc\HtmlTemplates\HtmlTemplateInterface;
-use Exception;
-use Throwable;
-
 
 /**
- * Class TemplateException
+ * Interface SingleContentHtmlTemplateInterface
  *
  * @package CodeInc\HtmlTemplates
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class TemplateException extends Exception
+interface SingleContentHtmlTemplateInterface extends HtmlTemplateInterface
 {
-	/**
-	 * @var HtmlTemplateInterface|null
-	 */
-	private $template;
+    /**
+     * Adds come content to the HTML template.
+     *
+     * @param string $content
+     */
+    public function addContent(string $content):void;
 
-	/**
-	 * TemplateException constructor.
-	 *
-	 * @param string $message
-	 * @param HtmlTemplateInterface|null $template
-	 * @param null|Throwable $previous
-	 */
-	public function __construct(string $message, ?HtmlTemplateInterface $template = null, ?Throwable $previous = null)
-    {
-		$this->template = $template;
-		parent::__construct($message, $previous);
-	}
+    /**
+     * Sets the content of the HTML templates (replaces all previously set or added content).
+     *
+     * @param string $content
+     */
+    public function setContent(string $content):void;
 
-	/**
-	 * @return HtmlTemplateInterface|null
-	 */
-	public function getTemplate():?HtmlTemplateInterface
-    {
-		return $this->template;
-	}
+    /**
+     * Returns the HTML content or NULL if no content is set.
+     *
+     * @return null|string
+     */
+    public function getContent():?string;
 }

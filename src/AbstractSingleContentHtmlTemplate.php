@@ -21,35 +21,35 @@
 
 namespace CodeInc\HtmlTemplates;
 
-
 /**
- * Class AbstractStringContentHtmlTemplate
+ * Class AbstractSingleContentHtmlTemplate
  *
  * @package CodeInc\HtmlTemplates
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-abstract class AbstractStringContentHtmlTemplate extends AbstractHtmlTemplate
+abstract class AbstractSingleContentHtmlTemplate extends AbstractHtmlTemplate
+    implements SingleContentHtmlTemplateInterface
 {
     /**
      * Page's content.
      *
      * @var string|null
      */
-    private $content;
+    protected $content;
 
     /**
      * Return's the header HTML coder
      *
      * @return string
      */
-    abstract protected function getHeader():string;
+    abstract protected function getHtmlHeader():string;
 
     /**
      * Returns the footer HTML code.
      *
      * @return string
      */
-    abstract protected function getFooter():string;
+    abstract protected function getHtmlFooter():string;
 
     /**
      * @inheritdoc
@@ -84,6 +84,8 @@ abstract class AbstractStringContentHtmlTemplate extends AbstractHtmlTemplate
      */
     public function getHtml():string
     {
-        return $this->getHeader().$this->getContent().$this->getFooter();
+        return $this->getHtmlHeader()
+            .$this->getContent()
+            .$this->getHtmlFooter();
     }
 }

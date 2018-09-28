@@ -20,7 +20,8 @@
 // Project:  HtmlTemplates
 //
 namespace CodeInc\HtmlTemplates;
-use CodeInc\ErrorRenderer\HtmlErrorRenderer;
+use CodeInc\HtmlTemplates\HtmlHeaders\HtmlHeaders;
+use CodeInc\HtmlTemplates\HtmlHeaders\HtmlHeadersException;
 
 
 /**
@@ -31,33 +32,53 @@ use CodeInc\ErrorRenderer\HtmlErrorRenderer;
  */
 abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
 {
-    use HtmlHeadersTrait;
-
-	public const DEFAULT_CHARSET = "UTF-8";
-	public const DEFAULT_LANGUAGE = "en-US";
+    public const DEFAULT_CHARSET = 'utf-8';
 
 	/**
 	 * Page's charset
 	 *
 	 * @var string
 	 */
-	protected $charset = self::DEFAULT_CHARSET;
+	protected $charset;
 
-	/**
+    /**
 	 * <html> tag language
-	 *
-	 * @var string
-	 */
-	protected $language = self::DEFAULT_LANGUAGE;
-
-	/**
-	 * Page's title
 	 *
 	 * @var string|null
 	 */
-	protected $title;
+	protected $language;
 
-	/**
+    /**
+     * Page's title
+     *
+     * @var string|null
+     */
+    protected $title;
+
+    /**
+     * @var HtmlHeaders
+     */
+    protected $headers;
+
+    /**
+     * AbstractHtmlTemplate constructor.
+     *
+     * @param null|string $title
+     * @param null|string $language
+     * @param string $charset
+     * @param HtmlHeaders|null $headers
+     * @throws HtmlHeadersException
+     */
+	public function __construct(?string $title = null, ?string $language = null,
+        string $charset = self::DEFAULT_CHARSET, ?HtmlHeaders $headers = null)
+    {
+        $this->title = $title;
+        $this->charset = $charset;
+        $this->language = $language;
+        $this->headers = $headers ?? new HtmlHeaders();
+    }
+
+    /**
 	 * Returns the HTML title
 	 *
 	 * @return null|string
@@ -67,7 +88,7 @@ abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
 		return $this->title;
 	}
 
-	/**
+    /**
 	 * @param string $title
 	 */
 	public function setTitle(string $title):void
@@ -75,7 +96,7 @@ abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
 		$this->title = $title;
 	}
 
-	/**
+    /**
 	 * @return string
 	 */
 	public function getCharset():string
@@ -83,15 +104,15 @@ abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
 		return $this->charset;
 	}
 
-	/**
-	 * @param string $htmlCharset
+    /**
+	 * @param string $charset
 	 */
-	public function setCharset(string $htmlCharset):void
+	public function setCharset(string $charset):void
     {
-		$this->charset = $htmlCharset;
+		$this->charset = $charset;
 	}
 
-	/**
+    /**
 	 * @return string
 	 */
 	public function getLanguage():string
@@ -99,7 +120,7 @@ abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
 		return $this->language;
 	}
 
-	/**
+    /**
 	 * @param string $language
 	 */
 	public function setLanguage(string $language):void
@@ -108,17 +129,11 @@ abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
 	}
 
     /**
-     * @return string
+     * @inheritdoc
+     * @return HtmlHeaders
      */
-    public function __toString():string
+    public function getHeaders():HtmlHeaders
     {
-        try {
-            return $this->getHtml();
-        }
-        catch (\Throwable $exception) {
-            return (string)new HtmlErrorRenderer(
-                new TemplateException(_("Error while rendering the HTML template"), $this, $exception)
-            );
-        }
+        return $this->headers;
     }
 }
