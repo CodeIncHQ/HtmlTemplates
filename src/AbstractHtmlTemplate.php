@@ -39,7 +39,7 @@ abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
 	 *
 	 * @var string
 	 */
-	protected $charset;
+	protected $charset = self::DEFAULT_CHARSET;
 
     /**
 	 * <html> tag language
@@ -63,18 +63,11 @@ abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
     /**
      * AbstractHtmlTemplate constructor.
      *
-     * @param null|string $title
-     * @param null|string $language
-     * @param string $charset
      * @param HtmlHeaders|null $headers
      * @throws HtmlHeadersException
      */
-	public function __construct(?string $title = null, ?string $language = null,
-        string $charset = self::DEFAULT_CHARSET, ?HtmlHeaders $headers = null)
+	public function __construct(?HtmlHeaders $headers = null)
     {
-        $this->title = $title;
-        $this->charset = $charset;
-        $this->language = $language;
         $this->headers = $headers ?? new HtmlHeaders();
     }
 

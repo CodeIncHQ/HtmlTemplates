@@ -42,17 +42,13 @@ abstract class AbstractContentHtmlTemplate extends AbstractHtmlTemplate
     /**
      * AbstractSingleContentHtmlTemplate constructor.
      *
-     * @param null|string $title
-     * @param null|string $language
-     * @param string $charset
-     * @param HtmlHeaders|null $headers
      * @param ContentInterface|null $content
+     * @param HtmlHeaders|null $headers
      * @throws HtmlHeadersException
      */
-    public function __construct(?string $title = null, ?string $language = null,
-        string $charset = self::DEFAULT_CHARSET, ?HtmlHeaders $headers = null, ?ContentInterface $content = null)
+    public function __construct(?ContentInterface $content = null, ?HtmlHeaders $headers = null)
     {
-        parent::__construct($title, $language, $charset, $headers);
+        parent::__construct($headers);
         $this->content = $content ?? new StringContent();
     }
 
