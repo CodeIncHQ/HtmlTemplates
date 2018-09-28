@@ -3,66 +3,55 @@
 // +---------------------------------------------------------------------+
 // | CODE INC. SOURCE CODE                                               |
 // +---------------------------------------------------------------------+
-// | Copyright (c) 2017 - Code Inc. SAS - All Rights Reserved.           |
+// | Copyright (c) 2018 - Code Inc. SAS - All Rights Reserved.           |
 // | Visit https://www.codeinc.fr for more information about licensing.  |
 // +---------------------------------------------------------------------+
 // | NOTICE:  All information contained herein is, and remains the       |
 // | property of Code Inc. SAS. The intellectual and technical concepts  |
 // | contained herein are proprietary to Code Inc. SAS are protected by  |
 // | trade secret or copyright law. Dissemination of this information or |
-// | reproduction of this material  is strictly forbidden unless prior   |
+// | reproduction of this material is strictly forbidden unless prior    |
 // | written permission is obtained from Code Inc. SAS.                  |
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     20/02/2018
-// Time:     15:21
+// Date:     28/09/2018
 // Project:  HtmlTemplates
 //
-namespace CodeInc\HtmlTemplates;
+declare(strict_types=1);
+namespace CodeInc\HtmlTemplates\Content;
+use Psr\Http\Message\StreamInterface;
 
 
 /**
- * Class BlankHtmlTemplate
+ * Class StreamContent
  *
- * @package CodeInc\HtmlTemplates
+ * @package CodeInc\HtmlTemplates\Content
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class BlankHtmlTemplate extends AbstractContentHtmlTemplate
+class StreamContent extends AbstractContent
 {
     /**
-     * @inheritdoc
-     * @return string
+     * @var StreamInterface
      */
-	protected function getHtmlHeader():string
-	{
-	    $lang = $this->getLanguage();
-	    ob_start();
-		?>
-		<!DOCTYPE html>
-		<html<?=$lang ? ' lang="'.htmlspecialchars($lang).'"' : ''?>>
-			<head>
-				<meta charset="<?=htmlspecialchars($this->getCharset())?>">
-				<title><?=htmlspecialchars($this->getTitle())?></title>
-				<?=$this->getHeaders()->getAsString()?>
-			</head>
+    private $stream;
 
-			<body>
-		<?
-        return ob_get_clean();
-	}
+    /**
+     * StreamContent constructor.
+     *
+     * @param StreamInterface $stream
+     */
+    public function __construct(StreamInterface $stream)
+    {
+        $this->stream = $stream;
+    }
 
     /**
      * @inheritdoc
      * @return string
      */
-	public function getHtmlFooter():string
-	{
-	    ob_start();
-		?>
-			</body>
-		</html>
-		<?
-        return ob_get_clean();
-	}
+    public function toString():string
+    {
+        return $this->stream->getContents();
+    }
 }

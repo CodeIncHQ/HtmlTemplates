@@ -3,66 +3,44 @@
 // +---------------------------------------------------------------------+
 // | CODE INC. SOURCE CODE                                               |
 // +---------------------------------------------------------------------+
-// | Copyright (c) 2017 - Code Inc. SAS - All Rights Reserved.           |
+// | Copyright (c) 2018 - Code Inc. SAS - All Rights Reserved.           |
 // | Visit https://www.codeinc.fr for more information about licensing.  |
 // +---------------------------------------------------------------------+
 // | NOTICE:  All information contained herein is, and remains the       |
 // | property of Code Inc. SAS. The intellectual and technical concepts  |
 // | contained herein are proprietary to Code Inc. SAS are protected by  |
 // | trade secret or copyright law. Dissemination of this information or |
-// | reproduction of this material  is strictly forbidden unless prior   |
+// | reproduction of this material is strictly forbidden unless prior    |
 // | written permission is obtained from Code Inc. SAS.                  |
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     20/02/2018
-// Time:     15:21
+// Date:     28/09/2018
 // Project:  HtmlTemplates
 //
-namespace CodeInc\HtmlTemplates;
-
+declare(strict_types=1);
+namespace CodeInc\HtmlTemplates\Content;
 
 /**
- * Class BlankHtmlTemplate
+ * Interface ContentInterface
  *
- * @package CodeInc\HtmlTemplates
+ * @package CodeInc\HtmlTemplates\Content
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class BlankHtmlTemplate extends AbstractContentHtmlTemplate
+interface ContentInterface
 {
     /**
-     * @inheritdoc
+     * Returns the content
+     *
      * @return string
      */
-	protected function getHtmlHeader():string
-	{
-	    $lang = $this->getLanguage();
-	    ob_start();
-		?>
-		<!DOCTYPE html>
-		<html<?=$lang ? ' lang="'.htmlspecialchars($lang).'"' : ''?>>
-			<head>
-				<meta charset="<?=htmlspecialchars($this->getCharset())?>">
-				<title><?=htmlspecialchars($this->getTitle())?></title>
-				<?=$this->getHeaders()->getAsString()?>
-			</head>
-
-			<body>
-		<?
-        return ob_get_clean();
-	}
+    public function toString():string;
 
     /**
-     * @inheritdoc
+     * Alias of toString()
+     *
+     * @uses ContentInterface::toString()
      * @return string
      */
-	public function getHtmlFooter():string
-	{
-	    ob_start();
-		?>
-			</body>
-		</html>
-		<?
-        return ob_get_clean();
-	}
+    public function __toString():string;
 }

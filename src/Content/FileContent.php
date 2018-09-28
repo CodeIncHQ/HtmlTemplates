@@ -19,34 +19,41 @@
 // Project:  HtmlTemplates
 //
 declare(strict_types=1);
-namespace CodeInc\HtmlTemplates;
+namespace CodeInc\HtmlTemplates\Content;
 
 /**
- * Interface SingleContentHtmlTemplateInterface
+ * Class FileContent
  *
- * @package CodeInc\HtmlTemplates
+ * @package CodeInc\HtmlTemplates\Content
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-interface SingleContentHtmlTemplateInterface extends HtmlTemplateInterface
+class FileContent extends AbstractContent
 {
     /**
-     * Adds come content to the HTML template.
-     *
-     * @param string $content
+     * @var string
      */
-    public function addContent(string $content):void;
+    private $path;
 
     /**
-     * Sets the content of the HTML templates (replaces all previously set or added content).
+     * FileContent constructor.
      *
-     * @param string $content
+     * @param string $path
      */
-    public function setContent(string $content):void;
+    public function __construct(string $path)
+    {
+        $this->path = $path;
+    }
 
     /**
-     * Returns the HTML content or NULL if no content is set.
+     * Returns the content
      *
-     * @return null|string
+     * @return string
      */
-    public function getContent():?string;
+    public function toString():string
+    {
+        if (($content = file_get_contents($this->path)) === false) {
+            throw new \RuntimeException(sprintf("Unable to read the content of the file '%s'", $this->path));
+        }
+        return $content;
+    }
 }

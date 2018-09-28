@@ -20,6 +20,11 @@
 //
 
 namespace CodeInc\HtmlTemplates;
+use CodeInc\HtmlTemplates\Content\ContentInterface;
+use CodeInc\HtmlTemplates\Content\StringContent;
+use CodeInc\HtmlTemplates\HtmlHeaders\HtmlHeaders;
+use CodeInc\HtmlTemplates\HtmlHeaders\HtmlHeadersException;
+
 
 /**
  * Class AbstractSingleContentHtmlTemplate
@@ -27,15 +32,39 @@ namespace CodeInc\HtmlTemplates;
  * @package CodeInc\HtmlTemplates
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-abstract class AbstractSingleContentHtmlTemplate extends AbstractHtmlTemplate
-    implements SingleContentHtmlTemplateInterface
+abstract class AbstractContentHtmlTemplate extends AbstractHtmlTemplate
 {
     /**
-     * Page's content.
-     *
-     * @var string|null
+     * @var ContentInterface|StringContent
      */
     protected $content;
+
+    /**
+     * AbstractSingleContentHtmlTemplate constructor.
+     *
+     * @param null|string $title
+     * @param null|string $language
+     * @param string $charset
+     * @param HtmlHeaders|null $headers
+     * @param ContentInterface|null $content
+     * @throws HtmlHeadersException
+     */
+    public function __construct(?string $title = null, ?string $language = null,
+        string $charset = self::DEFAULT_CHARSET, ?HtmlHeaders $headers = null, ?ContentInterface $content = null)
+    {
+        parent::__construct($title, $language, $charset, $headers);
+        $this->content = $content ?? new StringContent();
+    }
+
+    /**
+     * Returns the page's content.
+     *
+     * @return ContentInterface|StringContent
+     */
+    public function getContent():ContentInterface
+    {
+        return $this->content;
+    }
 
     /**
      * Return's the header HTML coder
@@ -53,39 +82,12 @@ abstract class AbstractSingleContentHtmlTemplate extends AbstractHtmlTemplate
 
     /**
      * @inheritdoc
-     * @param string $content
-     */
-    public function addContent(string $content):void
-    {
-        $this->content .= $content;
-    }
-
-    /**
-     * @inheritdoc
-     * @param string $content
-     */
-    public function setContent(string $content):void
-    {
-        $this->content = $content;
-    }
-
-    /**
-     * @inheritdoc
-     * @return null|string
-     */
-    public function getContent():?string
-    {
-        return $this->content;
-    }
-
-    /**
-     * @inheritdoc
      * @return string
      */
     public function getHtml():string
     {
         return $this->getHtmlHeader()
-            .$this->getContent()
+            .$this->getContent()->toString()
             .$this->getHtmlFooter();
     }
 }
