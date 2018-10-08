@@ -1,6 +1,6 @@
 # HTML templates
 
-A collection of HTML templates wirtten in PHP 7.
+A collection of HTML templates written in PHP 7.
 
 
 ## Installation
