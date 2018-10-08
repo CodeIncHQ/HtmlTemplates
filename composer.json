@@ -1,7 +1,7 @@
 {
   "name": "codeinc/ui",
   "version": "3.0.0-beta.2",
-  "description": "A collection of HTML templates",
+  "description": "A library for user interfaces rendering in PHP and HTML",
   "homepage": "https://github.com/CodeIncHQ/UI",
   "type": "library",
   "license": "MIT",
