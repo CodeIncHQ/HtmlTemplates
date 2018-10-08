@@ -15,44 +15,21 @@
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     28/09/2018
+// Date:     08/10/2018
 // Project:  UI
 //
 declare(strict_types=1);
-namespace CodeInc\UI\Component\Library;
-use CodeInc\UI\Component\ComponentInterface;
-use Psr\Http\Message\StreamInterface;
+namespace CodeInc\UI;
+use CodeInc\PrintableInterface\PrintableInterface;
 
 
 /**
- * Class StreamComponent
+ * Interface PrintableComponentInterface
  *
- * @package CodeInc\UI\Component\Library
+ * @package CodeInc\UI
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class StreamComponent implements ComponentInterface
+interface PrintableComponentInterface extends ComponentInterface, PrintableInterface
 {
-    /**
-     * @var StreamInterface
-     */
-    private $stream;
 
-    /**
-     * StreamContent constructor.
-     *
-     * @param StreamInterface $stream
-     */
-    public function __construct(StreamInterface $stream)
-    {
-        $this->stream = $stream;
-    }
-
-    /**
-     * @inheritdoc
-     * @return string
-     */
-    public function get():string
-    {
-        return $this->stream->getContents();
-    }
 }

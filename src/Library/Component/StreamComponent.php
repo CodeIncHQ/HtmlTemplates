@@ -15,49 +15,44 @@
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     08/10/2018
+// Date:     28/09/2018
 // Project:  UI
 //
 declare(strict_types=1);
-namespace CodeInc\UI\Component\Exceptions;
-use CodeInc\UI\Component\ComponentInterface;
-use Throwable;
+namespace CodeInc\UI\Library\Component;
+use CodeInc\UI\ComponentInterface;
+use Psr\Http\Message\StreamInterface;
 
 
 /**
- * Class ComponentRuntimeException
+ * Class StreamComponent
  *
- * @package CodeInc\UI\Component\Exceptions
+ * @package CodeInc\UI\Library\Component
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class ComponentRuntimeException extends \RuntimeException implements ComponentException
+class StreamComponent implements ComponentInterface
 {
     /**
-     * @var ComponentInterface
+     * @var StreamInterface
      */
-    private $component;
+    private $stream;
 
     /**
-     * ComponentRuntimeException constructor.
+     * StreamContent constructor.
      *
-     * @param ComponentInterface $component
-     * @param string $message
-     * @param int $code
-     * @param Throwable|null $previous
+     * @param StreamInterface $stream
      */
-    public function __construct(ComponentInterface $component, string $message = "",
-        int $code = 0, Throwable $previous = null)
+    public function __construct(StreamInterface $stream)
     {
-        $this->component = $component;
-        parent::__construct($message, $code, $previous);
+        $this->stream = $stream;
     }
 
     /**
      * @inheritdoc
-     * @return ComponentInterface
+     * @return string
      */
-    public function getComponent():ComponentInterface
+    public function get():string
     {
-        return $this->component;
+        return $this->stream->getContents();
     }
 }

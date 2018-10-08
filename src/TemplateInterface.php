@@ -3,7 +3,7 @@
 // +---------------------------------------------------------------------+
 // | CODE INC. SOURCE CODE                                               |
 // +---------------------------------------------------------------------+
-// | Copyright (c) 2019 - Code Inc. SAS - All Rights Reserved.           |
+// | Copyright (c) 2018 - Code Inc. SAS - All Rights Reserved.           |
 // | Visit https://www.codeinc.fr for more information about licensing.  |
 // +---------------------------------------------------------------------+
 // | NOTICE:  All information contained herein is, and remains the       |
@@ -15,27 +15,20 @@
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     20/02/2018
-// Time:     14:46
+// Date:     08/10/2018
 // Project:  UI
 //
-namespace CodeInc\UI\Templates\Html;
-use CodeInc\UI\Component\Library\HtmlHeaders;
-use CodeInc\UI\Templates\TemplateInterface;
+declare(strict_types=1);
+namespace CodeInc\UI;
 
 
 /**
- * Interface HtmlTemplateInterface
+ * Interface TemplateInterface
  *
- * @package CodeInc\UI\Templates\Html
+ * @package CodeInc\UI
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-interface HtmlTemplateInterface extends TemplateInterface
+interface TemplateInterface extends ComponentInterface
 {
-    /**
-     * Returns the object in charge of managing the HTML headers.
-     *
-     * @return HtmlHeaders
-     */
-    public function getHeaders():HtmlHeaders;
+
 }

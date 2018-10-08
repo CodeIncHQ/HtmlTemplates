@@ -19,20 +19,44 @@
 // Project:  UI
 //
 declare(strict_types=1);
-namespace CodeInc\UI\Component;
+namespace CodeInc\UI\Library\Component;
+use CodeInc\UI\ComponentInterface;
+
 
 /**
- * Interface ComponentInterface
+ * Class FileComponent
  *
- * @package CodeInc\UI\Component
+ * @package CodeInc\UI\Library\Component
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-interface ComponentInterface
+class FileComponent implements ComponentInterface
 {
     /**
-     * Returns the content's generated output.
+     * @var string
+     */
+    private $path;
+
+    /**
+     * FileContent constructor.
+     *
+     * @param string $path
+     */
+    public function __construct(string $path)
+    {
+        $this->path = $path;
+    }
+
+    /**
+     * Returns the content
      *
      * @return string
      */
-    public function get():string;
+    public function get():string
+    {
+        if (($content = file_get_contents($this->path)) === false) {
+            throw new \RuntimeException($this,
+                sprintf("Unable to read the content of the file '%s'", $this->path));
+        }
+        return $content;
+    }
 }
