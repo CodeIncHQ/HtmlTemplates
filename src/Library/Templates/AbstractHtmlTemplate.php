@@ -38,7 +38,7 @@ abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
      *
      * @var string|null
      */
-    protected $title;
+    protected $pageTitle;
 
     /**
      * HTML headers.
@@ -71,16 +71,16 @@ abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
     /**
      * AbstractHtmlTemplate constructor.
      *
-     * @param null|string $title
+     * @param null|string $pageTitle
      * @param HtmlHeadersComponent|null $headers
      * @param ComponentInterface $content
      * @param string $charset
      * @param null|string $language
      */
-	public function __construct(?string $title = null, ?HtmlHeadersComponent $headers = null,
+	public function __construct(?string $pageTitle = null, ?HtmlHeadersComponent $headers = null,
         ?ComponentInterface $content = null, string $charset = 'utf-8', ?string $language = null)
     {
-        $this->title = $title;
+        $this->pageTitle = $pageTitle;
         $this->headers = $headers ?? new HtmlHeadersComponent();
         $this->content = $content ?? new StringComponent();
         $this->charset = $charset;
@@ -106,9 +106,9 @@ abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
 	 *
 	 * @return null|string
 	 */
-	public function getTitle():?string
+	public function getPageTitle():?string
     {
-		return $this->title;
+		return $this->pageTitle;
 	}
 
     /**

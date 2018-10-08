@@ -42,7 +42,7 @@ class BlankHtmlTemplate extends AbstractHtmlTemplate
 		<html<?=$lang ? ' lang="'.htmlspecialchars($lang).'"' : ''?>>
 			<head>
 				<meta charset="<?=htmlspecialchars($this->getCharset())?>">
-				<title><?=htmlspecialchars($this->getTitle())?></title>
+				<title><?=htmlspecialchars($this->getPageTitle())?></title>
 				<?=$this->getHeaders()->get()?>
 			</head>
 
