@@ -20,9 +20,7 @@
 // Project:  UI
 //
 namespace CodeInc\UI\Library\Templates;
-use CodeInc\UI\ComponentInterface;
 use CodeInc\UI\Library\Component\HtmlHeadersComponent;
-use CodeInc\UI\Library\Component\StringComponent;
 
 
 /**
@@ -34,13 +32,6 @@ use CodeInc\UI\Library\Component\StringComponent;
 abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
 {
     /**
-     * Page's title
-     *
-     * @var string|null
-     */
-    protected $pageTitle;
-
-    /**
      * HTML headers.
      *
      * @var HtmlHeadersComponent
@@ -48,68 +39,14 @@ abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
     protected $headers;
 
     /**
-	 * Page's charset
-	 *
-	 * @var string
-	 */
-	protected $charset;
-
-    /**
-	 * <html> tag language
-	 *
-	 * @var string|null
-	 */
-	protected $language;
-
-    /**
-     * Page's content.
-     *
-     * @var ComponentInterface
-     */
-	protected $content;
-
-    /**
      * AbstractHtmlTemplate constructor.
      *
-     * @param null|string $pageTitle
      * @param HtmlHeadersComponent|null $headers
-     * @param ComponentInterface $content
-     * @param string $charset
-     * @param null|string $language
      */
-	public function __construct(?string $pageTitle = null, ?HtmlHeadersComponent $headers = null,
-        ?ComponentInterface $content = null, string $charset = 'utf-8', ?string $language = null)
+	public function __construct(?HtmlHeadersComponent $headers = null)
     {
-        $this->pageTitle = $pageTitle;
         $this->headers = $headers ?? new HtmlHeadersComponent();
-        $this->content = $content ?? new StringComponent();
-        $this->charset = $charset;
-        $this->language = $language;
     }
-
-    /**
-     * Returns the HTML template's header.
-     *
-     * @return string
-     */
-    abstract protected function getTemplateHeader():string;
-
-    /**
-     * Returns the HTML template's footer.
-     *
-     * @return string
-     */
-	abstract protected function getTemplateFooter():string;
-
-    /**
-	 * Returns the page's title.
-	 *
-	 * @return null|string
-	 */
-	public function getPageTitle():?string
-    {
-		return $this->pageTitle;
-	}
 
     /**
      * @inheritdoc
@@ -118,46 +55,5 @@ abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
     public function getHeaders():HtmlHeadersComponent
     {
         return $this->headers;
-    }
-
-    /**
-     * Returns the page's content.
-     *
-     * @return ComponentInterface
-     */
-    public function getContent():ComponentInterface
-    {
-        return $this->content;
-    }
-
-    /**
-     * Returns the page's charset.
-     *
-     * @return string
-     */
-    public function getCharset():string
-    {
-        return $this->charset;
-    }
-
-    /**
-     * Returns the page's language or NULL if not set.
-     *
-     * @return null|string
-     */
-    public function getLanguage():?string
-    {
-        return $this->language;
-    }
-
-    /**
-     * @inheritdoc
-     * @return string
-     */
-    public function get():string
-    {
-        return $this->getTemplateHeader()
-            .$this->getContent()->get()
-            .$this->getTemplateFooter();
     }
 }
