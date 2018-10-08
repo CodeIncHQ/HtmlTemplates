@@ -24,12 +24,12 @@ use CodeInc\UI\ComponentInterface;
 
 
 /**
- * Class HtmlHeaders
+ * Class HtmlHeadersComponent
  *
  * @package CodeInc\UI\Library\Component
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class HtmlHeaders implements \IteratorAggregate, \Countable, ComponentInterface
+class HtmlHeadersComponent implements \IteratorAggregate, \Countable, ComponentInterface
 {
     /**
      * @var array
@@ -37,7 +37,7 @@ class HtmlHeaders implements \IteratorAggregate, \Countable, ComponentInterface
     protected $headers = [];
 
     /**
-     * HtmlHeaders constructor.
+     * HtmlHeadersComponent constructor.
      *
      * @param iterable|null $headers
      */
@@ -149,7 +149,7 @@ class HtmlHeaders implements \IteratorAggregate, \Countable, ComponentInterface
      * Returns all the headers as a string.
      *
      * @inheritdoc
-     * @uses HtmlHeaders::getAsString()
+     * @uses HtmlHeadersComponent::getAsString()
      * @return string
      */
     public function get(string $glue = "\n"):string

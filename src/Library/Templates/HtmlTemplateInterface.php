@@ -20,7 +20,7 @@
 // Project:  UI
 //
 namespace CodeInc\UI\Library\Templates;
-use CodeInc\UI\Library\Component\HtmlHeaders;
+use CodeInc\UI\Library\Component\HtmlHeadersComponent;
 use CodeInc\UI\TemplateInterface;
 
 
@@ -35,7 +35,7 @@ interface HtmlTemplateInterface extends TemplateInterface
     /**
      * Returns the object in charge of managing the HTML headers.
      *
-     * @return HtmlHeaders
+     * @return HtmlHeadersComponent
      */
-    public function getHeaders():HtmlHeaders;
+    public function getHeaders():HtmlHeadersComponent;
 }

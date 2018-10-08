@@ -21,7 +21,7 @@
 //
 namespace CodeInc\UI\Library\Templates;
 use CodeInc\UI\ComponentInterface;
-use CodeInc\UI\Library\Component\HtmlHeaders;
+use CodeInc\UI\Library\Component\HtmlHeadersComponent;
 use CodeInc\UI\Library\Component\StringComponent;
 
 
@@ -43,7 +43,7 @@ abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
     /**
      * HTML headers.
      *
-     * @var HtmlHeaders
+     * @var HtmlHeadersComponent
      */
     protected $headers;
 
@@ -72,16 +72,16 @@ abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
      * AbstractHtmlTemplate constructor.
      *
      * @param null|string $title
-     * @param HtmlHeaders|null $headers
+     * @param HtmlHeadersComponent|null $headers
      * @param ComponentInterface $content
      * @param string $charset
      * @param null|string $language
      */
-	public function __construct(?string $title = null, ?HtmlHeaders $headers = null,
+	public function __construct(?string $title = null, ?HtmlHeadersComponent $headers = null,
         ?ComponentInterface $content = null, string $charset = 'utf-8', ?string $language = null)
     {
         $this->title = $title;
-        $this->headers = $headers ?? new HtmlHeaders();
+        $this->headers = $headers ?? new HtmlHeadersComponent();
         $this->content = $content ?? new StringComponent();
         $this->charset = $charset;
         $this->language = $language;
@@ -113,9 +113,9 @@ abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
 
     /**
      * @inheritdoc
-     * @return HtmlHeaders
+     * @return HtmlHeadersComponent
      */
-    public function getHeaders():HtmlHeaders
+    public function getHeaders():HtmlHeadersComponent
     {
         return $this->headers;
     }
