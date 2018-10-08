@@ -1,23 +1,24 @@
 {
-  "name": "codeinc/html-templates",
+  "name": "codeinc/ui",
   "version": "3.0.0-dev",
   "description": "A collection of HTML templates",
-  "homepage": "https://github.com/CodeIncHQ/HtmlTemplates",
+  "homepage": "https://github.com/CodeIncHQ/UI",
   "type": "library",
   "license": "MIT",
   "require": {
     "php": ">=7.1",
     "codeinc/error-renderer": "^1.3",
-    "psr/http-message": "^1.0"
+    "psr/http-message": "^1.0",
+    "codeinc/printable-interface": "^1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^7"
   },
   "autoload": {
-    "psr-4": {"CodeInc\\HtmlTemplates\\": "src/"}
+    "psr-4": {"CodeInc\\UI\\": "src/"}
   },
   "autoload-dev": {
-    "psr-4": { "CodeInc\\HtmlTemplates\\Tests\\": "tests/" }
+    "psr-4": { "CodeInc\\UI\\Tests\\": "tests/" }
   },
   "authors": [
     {

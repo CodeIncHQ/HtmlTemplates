@@ -3,7 +3,7 @@
 // +---------------------------------------------------------------------+
 // | CODE INC. SOURCE CODE                                               |
 // +---------------------------------------------------------------------+
-// | Copyright (c) 2019 - Code Inc. SAS - All Rights Reserved.           |
+// | Copyright (c) 2018 - Code Inc. SAS - All Rights Reserved.           |
 // | Visit https://www.codeinc.fr for more information about licensing.  |
 // +---------------------------------------------------------------------+
 // | NOTICE:  All information contained herein is, and remains the       |
@@ -15,33 +15,49 @@
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     20/02/2018
-// Time:     14:46
-// Project:  HtmlTemplates
+// Date:     08/10/2018
+// Project:  UI
 //
-namespace CodeInc\HtmlTemplates;
-use CodeInc\HtmlTemplates\HtmlHeaders\HtmlHeaders;
+declare(strict_types=1);
+namespace CodeInc\UI\Component\Exceptions;
+use CodeInc\UI\Component\ComponentInterface;
+use Throwable;
 
 
 /**
- * Interface HtmlTemplateInterface
+ * Class ComponentRuntimeException
  *
- * @package CodeInc\HtmlTemplates
+ * @package CodeInc\UI\Component\Exceptions
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-interface HtmlTemplateInterface
+class ComponentRuntimeException extends \RuntimeException implements ComponentException
 {
     /**
-     * Returns the object in charge of managing the HTML headers.
-     *
-     * @return HtmlHeaders
+     * @var ComponentInterface
      */
-    public function getHeaders():HtmlHeaders;
+    private $component;
 
     /**
-     * Returns the full generated HTML page.
+     * ComponentRuntimeException constructor.
      *
-     * @return string
+     * @param ComponentInterface $component
+     * @param string $message
+     * @param int $code
+     * @param Throwable|null $previous
      */
-    public function getHtml():string;
+    public function __construct(ComponentInterface $component, string $message = "",
+        int $code = 0, Throwable $previous = null)
+    {
+        $this->component = $component;
+        parent::__construct($message, $code, $previous);
+    }
+
+    /**
+     * @inheritdoc
+     * @return ComponentInterface
+     */
+    public function getComponent():ComponentInterface
+    {
+        return $this->component;
+    }
 }

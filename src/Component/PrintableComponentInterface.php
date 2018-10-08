@@ -15,73 +15,21 @@
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     28/09/2018
-// Project:  HtmlTemplates
+// Date:     08/10/2018
+// Project:  UI
 //
 declare(strict_types=1);
-namespace CodeInc\HtmlTemplates\Content;
+namespace CodeInc\UI\Component;
+use CodeInc\PrintableInterface\PrintableInterface;
 
 
 /**
- * Class StringContent
+ * Interface PrintableComponentInterface
  *
- * @package CodeInc\HtmlTemplates\Content
+ * @package CodeInc\UI\Component
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class StringContent extends AbstractContent
+interface PrintableComponentInterface extends ComponentInterface, PrintableInterface
 {
-    /**
-     * @var string
-     */
-    private $content;
 
-    /**
-     * Adds some content.
-     *
-     * @param string $content
-     */
-    public function add(string $content):void
-    {
-        $this->content .= $content;
-    }
-
-    /**
-     * Sets or replaces the content.
-     *
-     * @param string $content
-     */
-    public function set(string $content):void
-    {
-        $this->content = $content;
-    }
-
-    /**
-     * Verifies if the content is empty.
-     *
-     * @return bool
-     */
-    public function isEmpty():bool
-    {
-        return empty($this->content);
-    }
-
-    /**
-     * Returns the content's length.
-     *
-     * @return int
-     */
-    public function length():int
-    {
-        return strlen($this->content);
-    }
-
-    /**
-     * Returns the content as a string.
-     *
-     * @return string
-     */
-    public function toString():string
-    {
-        return $this->content;
-    }
 }

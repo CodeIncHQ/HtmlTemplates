@@ -17,24 +17,24 @@
 // Author:   Joan Fabrégat <joan@codeinc.fr>
 // Date:     20/02/2018
 // Time:     15:21
-// Project:  HtmlTemplates
+// Project:  UI
 //
-namespace CodeInc\HtmlTemplates;
+namespace CodeInc\UI\Templates\Html;
 
 
 /**
  * Class BlankHtmlTemplate
  *
- * @package CodeInc\HtmlTemplates
+ * @package CodeInc\UI\Templates\Html
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class BlankHtmlTemplate extends AbstractContentHtmlTemplate
+class BlankHtmlTemplate extends AbstractHtmlTemplate
 {
     /**
      * @inheritdoc
      * @return string
      */
-	protected function getHtmlHeader():string
+	protected function getTemplateHeader():string
 	{
 	    $lang = $this->getLanguage();
 	    ob_start();
@@ -44,7 +44,7 @@ class BlankHtmlTemplate extends AbstractContentHtmlTemplate
 			<head>
 				<meta charset="<?=htmlspecialchars($this->getCharset())?>">
 				<title><?=htmlspecialchars($this->getTitle())?></title>
-				<?=$this->getHeaders()->getAsString()?>
+				<?=$this->getHeaders()->get()?>
 			</head>
 
 			<body>
@@ -56,7 +56,7 @@ class BlankHtmlTemplate extends AbstractContentHtmlTemplate
      * @inheritdoc
      * @return string
      */
-	public function getHtmlFooter():string
+	public function getTemplateFooter():string
 	{
 	    ob_start();
 		?>

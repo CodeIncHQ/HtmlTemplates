@@ -16,42 +16,23 @@
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
 // Date:     28/09/2018
-// Project:  HtmlTemplates
+// Project:  UI
 //
 declare(strict_types=1);
-namespace CodeInc\HtmlTemplates\Content;
-use Psr\Http\Message\StreamInterface;
-
+namespace CodeInc\UI\Component;
 
 /**
- * Class StreamContent
+ * Interface ComponentInterface
  *
- * @package CodeInc\HtmlTemplates\Content
+ * @package CodeInc\UI\Component
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class StreamContent extends AbstractContent
+interface ComponentInterface
 {
     /**
-     * @var StreamInterface
-     */
-    private $stream;
-
-    /**
-     * StreamContent constructor.
+     * Returns the content's generated output.
      *
-     * @param StreamInterface $stream
-     */
-    public function __construct(StreamInterface $stream)
-    {
-        $this->stream = $stream;
-    }
-
-    /**
-     * @inheritdoc
      * @return string
      */
-    public function toString():string
-    {
-        return $this->stream->getContents();
-    }
+    public function get():string;
 }

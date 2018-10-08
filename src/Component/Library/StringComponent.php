@@ -16,44 +16,73 @@
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
 // Date:     28/09/2018
-// Project:  HtmlTemplates
+// Project:  UI
 //
 declare(strict_types=1);
-namespace CodeInc\HtmlTemplates\Content;
+namespace CodeInc\UI\Component\Library;
+use CodeInc\UI\Component\ComponentInterface;
+
 
 /**
- * Class FileContent
+ * Class StringComponent
  *
- * @package CodeInc\HtmlTemplates\Content
+ * @package CodeInc\UI\Component\Library
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class FileContent extends AbstractContent
+class StringComponent implements ComponentInterface
 {
     /**
      * @var string
      */
-    private $path;
+    private $content;
 
     /**
-     * FileContent constructor.
+     * Adds some content.
      *
-     * @param string $path
+     * @param string $content
      */
-    public function __construct(string $path)
+    public function add(string $content):void
     {
-        $this->path = $path;
+        $this->content .= $content;
     }
 
     /**
-     * Returns the content
+     * Sets or replaces the content.
+     *
+     * @param string $content
+     */
+    public function set(string $content):void
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * Verifies if the content is empty.
+     *
+     * @return bool
+     */
+    public function isEmpty():bool
+    {
+        return empty($this->content);
+    }
+
+    /**
+     * Returns the content's length.
+     *
+     * @return int
+     */
+    public function length():int
+    {
+        return strlen($this->content);
+    }
+
+    /**
+     * Returns the content as a string.
      *
      * @return string
      */
-    public function toString():string
+    public function get():string
     {
-        if (($content = file_get_contents($this->path)) === false) {
-            throw new \RuntimeException(sprintf("Unable to read the content of the file '%s'", $this->path));
-        }
-        return $content;
+        return $this->content;
     }
 }

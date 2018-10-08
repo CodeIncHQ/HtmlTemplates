@@ -15,29 +15,45 @@
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     28/09/2018
-// Project:  HtmlTemplates
+// Date:     08/10/2018
+// Project:  UI
 //
 declare(strict_types=1);
-namespace CodeInc\HtmlTemplates\HtmlHeaders;
+namespace CodeInc\UI\Component\Library;
+use CodeInc\UI\Component\ComponentInterface;
+
 
 /**
- * Class HtmlHeadersException
+ * Class ImmutableStringComponent
  *
- * @package CodeInc\HtmlTemplates\HtmlHeaders
+ * @package CodeInc\UI\Component\Library
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class HtmlHeadersException extends \Exception
+class ImmutableStringComponent implements ComponentInterface
 {
-    public const CODE_NOT_A_HEADER = 1;
+    /**
+     * @var string
+     */
+    private $string;
 
     /**
-     * @param $item
-     * @return HtmlHeadersException
+     * ImmutableStringComponent constructor.
+     *
+     * @param string $string
      */
-    public static function notAnHeader($item):self
+    public function __construct(string $string)
     {
-        return new self(sprintf("The list item '%s' is not a string an can not be used as an header.",
-            is_object($item) ? get_class($item) : (string)$item), self::CODE_NOT_A_HEADER);
+        $this->string = $string;
+    }
+
+
+    /**
+     * Returns the content's generated output.
+     *
+     * @return string
+     */
+    public function get():string
+    {
+        return $this->string;
     }
 }

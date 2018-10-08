@@ -16,18 +16,21 @@
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
 // Date:     28/09/2018
-// Project:  HtmlTemplates
+// Project:  UI
 //
 declare(strict_types=1);
-namespace CodeInc\HtmlTemplates\HtmlHeaders;
+namespace CodeInc\UI\Component\Library;
+use CodeInc\UI\Component\ComponentInterface;
+use CodeInc\UI\Component\Exceptions\ComponentRuntimeException;
+
 
 /**
  * Class HtmlHeaders
  *
- * @package CodeInc\HtmlTemplates
+ * @package CodeInc\UI\Component\Library
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class HtmlHeaders implements \IteratorAggregate, \Countable
+class HtmlHeaders implements \IteratorAggregate, \Countable, ComponentInterface
 {
     /**
      * @var array
@@ -38,7 +41,6 @@ class HtmlHeaders implements \IteratorAggregate, \Countable
      * HtmlHeaders constructor.
      *
      * @param iterable|null $headers
-     * @throws HtmlHeadersException
      */
     public function __construct(?iterable $headers = null)
     {
@@ -61,13 +63,14 @@ class HtmlHeaders implements \IteratorAggregate, \Countable
      * Adds multiple headers.
      *
      * @param iterable $headers
-     * @throws HtmlHeadersException
      */
     public function addHeaders(iterable $headers):void
     {
         foreach ($headers as $header) {
             if (!is_string($header)) {
-                throw HtmlHeadersException::notAnHeader($header);
+                throw new ComponentRuntimeException($this,
+                    sprintf("The list item '%s' is not a string an can not be used as an header.",
+                        is_object($header) ? get_class($header) : (string)$headers));
             }
             $this->addHeader($header);
         }
@@ -108,16 +111,16 @@ class HtmlHeaders implements \IteratorAggregate, \Countable
      *
      * @param string $url
      * @param string|null $integrity
-     * @param string|null $crossorigin
+     * @param string|null $crossOrigin
      */
-    public function addJsHeader(string $url, ?string $integrity = null, ?string $crossorigin = null):void
+    public function addJsHeader(string $url, ?string $integrity = null, ?string $crossOrigin = null):void
     {
         $header = '<script src="'.htmlspecialchars($url).'"';
         if ($integrity) {
             $header .= ' integrity="'.htmlspecialchars($integrity).'"';
         }
-        if ($crossorigin) {
-            $header .= ' crossorigin="'.htmlspecialchars($crossorigin).'"';
+        if ($crossOrigin) {
+            $header .= ' crossorigin="'.htmlspecialchars($crossOrigin).'"';
         }
         $header .= '></script>';
         $this->addHeader($header);
@@ -146,21 +149,13 @@ class HtmlHeaders implements \IteratorAggregate, \Countable
     /**
      * Returns all the headers as a string.
      *
-     * @param string $glue
-     * @return string
-     */
-    public function getAsString(string $glue = "\n"):string
-    {
-        return implode($glue, $this->getAsArray());
-    }
-
-    /**
+     * @inheritdoc
      * @uses HtmlHeaders::getAsString()
      * @return string
      */
-    public function __toString():string
+    public function get(string $glue = "\n"):string
     {
-        return $this->getAsString();
+        return implode($glue, $this->getAsArray());
     }
 
     /**

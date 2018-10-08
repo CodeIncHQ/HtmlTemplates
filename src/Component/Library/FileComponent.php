@@ -16,34 +16,48 @@
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
 // Date:     28/09/2018
-// Project:  HtmlTemplates
+// Project:  UI
 //
 declare(strict_types=1);
-namespace CodeInc\HtmlTemplates\Content;
-use CodeInc\ErrorRenderer\HtmlErrorRenderer;
+namespace CodeInc\UI\Component\Library;
+use CodeInc\UI\Component\ComponentInterface;
+use CodeInc\UI\Component\Exceptions\ComponentRuntimeException;
 
 
 /**
- * Class AbstractContent
+ * Class FileComponent
  *
- * @package CodeInc\HtmlTemplates\Content
+ * @package CodeInc\UI\Component\Library
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-abstract class AbstractContent implements ContentInterface
+class FileComponent implements ComponentInterface
 {
     /**
-     * Alias of toString()
+     * @var string
+     */
+    private $path;
+
+    /**
+     * FileContent constructor.
      *
-     * @uses ContentInterface::toString()
+     * @param string $path
+     */
+    public function __construct(string $path)
+    {
+        $this->path = $path;
+    }
+
+    /**
+     * Returns the content
+     *
      * @return string
      */
-    public function __toString():string
+    public function get():string
     {
-        try {
-            return $this->toString();
+        if (($content = file_get_contents($this->path)) === false) {
+            throw new ComponentRuntimeException($this,
+                sprintf("Unable to read the content of the file '%s'", $this->path));
         }
-        catch (\Throwable $exception) {
-            return (string)new HtmlErrorRenderer($exception);
-        }
+        return $content;
     }
 }

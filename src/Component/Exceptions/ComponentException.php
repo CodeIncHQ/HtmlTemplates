@@ -15,32 +15,26 @@
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     28/09/2018
-// Project:  HtmlTemplates
+// Date:     08/10/2018
+// Project:  UI
 //
 declare(strict_types=1);
-namespace CodeInc\HtmlTemplates\Content;
+namespace CodeInc\UI\Component\Exceptions;
+use CodeInc\UI\Component\ComponentInterface;
+
 
 /**
- * Interface ContentInterface
+ * Interface ComponentException
  *
- * @package CodeInc\HtmlTemplates\Content
+ * @package CodeInc\UI\Component\Exceptions
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-interface ContentInterface
+interface ComponentException extends \Throwable
 {
     /**
-     * Returns the content
+     * Returns the component which threw the exception.
      *
-     * @return string
+     * @return ComponentInterface
      */
-    public function toString():string;
-
-    /**
-     * Alias of toString()
-     *
-     * @uses ContentInterface::toString()
-     * @return string
-     */
-    public function __toString():string;
+    public function getComponent():ComponentInterface;
 }
