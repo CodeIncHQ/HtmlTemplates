@@ -15,49 +15,45 @@
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     28/09/2018
+// Date:     08/10/2018
 // Project:  UI
 //
 declare(strict_types=1);
-namespace CodeInc\UI\Component\Library;
-use CodeInc\UI\Component\ComponentInterface;
-use CodeInc\UI\Component\Exceptions\ComponentRuntimeException;
+namespace CodeInc\UI\Library\Component;
+use CodeInc\UI\ComponentInterface;
 
 
 /**
- * Class FileComponent
+ * Class ImmutableStringComponent
  *
- * @package CodeInc\UI\Component\Library
+ * @package CodeInc\UI\Library\Component
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class FileComponent implements ComponentInterface
+class ImmutableStringComponent implements ComponentInterface
 {
     /**
      * @var string
      */
-    private $path;
+    private $string;
 
     /**
-     * FileContent constructor.
+     * ImmutableStringComponent constructor.
      *
-     * @param string $path
+     * @param string $string
      */
-    public function __construct(string $path)
+    public function __construct(string $string)
     {
-        $this->path = $path;
+        $this->string = $string;
     }
 
+
     /**
-     * Returns the content
+     * Returns the content's generated output.
      *
      * @return string
      */
     public function get():string
     {
-        if (($content = file_get_contents($this->path)) === false) {
-            throw new ComponentRuntimeException($this,
-                sprintf("Unable to read the content of the file '%s'", $this->path));
-        }
-        return $content;
+        return $this->string;
     }
 }

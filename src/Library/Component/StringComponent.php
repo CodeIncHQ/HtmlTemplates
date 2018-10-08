@@ -15,21 +15,74 @@
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     08/10/2018
+// Date:     28/09/2018
 // Project:  UI
 //
 declare(strict_types=1);
-namespace CodeInc\UI\Component;
-use CodeInc\PrintableInterface\PrintableInterface;
+namespace CodeInc\UI\Library\Component;
+use CodeInc\UI\ComponentInterface;
 
 
 /**
- * Interface PrintableComponentInterface
+ * Class StringComponent
  *
- * @package CodeInc\UI\Component
+ * @package CodeInc\UI\Library\Component
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-interface PrintableComponentInterface extends ComponentInterface, PrintableInterface
+class StringComponent implements ComponentInterface
 {
+    /**
+     * @var string
+     */
+    private $content;
 
+    /**
+     * Adds some content.
+     *
+     * @param string $content
+     */
+    public function add(string $content):void
+    {
+        $this->content .= $content;
+    }
+
+    /**
+     * Sets or replaces the content.
+     *
+     * @param string $content
+     */
+    public function set(string $content):void
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * Verifies if the content is empty.
+     *
+     * @return bool
+     */
+    public function isEmpty():bool
+    {
+        return empty($this->content);
+    }
+
+    /**
+     * Returns the content's length.
+     *
+     * @return int
+     */
+    public function length():int
+    {
+        return strlen($this->content);
+    }
+
+    /**
+     * Returns the content as a string.
+     *
+     * @return string
+     */
+    public function get():string
+    {
+        return $this->content;
+    }
 }

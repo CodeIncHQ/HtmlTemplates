@@ -3,7 +3,7 @@
 // +---------------------------------------------------------------------+
 // | CODE INC. SOURCE CODE                                               |
 // +---------------------------------------------------------------------+
-// | Copyright (c) 2018 - Code Inc. SAS - All Rights Reserved.           |
+// | Copyright (c) 2019 - Code Inc. SAS - All Rights Reserved.           |
 // | Visit https://www.codeinc.fr for more information about licensing.  |
 // +---------------------------------------------------------------------+
 // | NOTICE:  All information contained herein is, and remains the       |
@@ -15,26 +15,27 @@
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     08/10/2018
+// Date:     20/02/2018
+// Time:     14:46
 // Project:  UI
 //
-declare(strict_types=1);
-namespace CodeInc\UI\Component\Exceptions;
-use CodeInc\UI\Component\ComponentInterface;
+namespace CodeInc\UI\Library\Templates;
+use CodeInc\UI\Library\Component\HtmlHeaders;
+use CodeInc\UI\TemplateInterface;
 
 
 /**
- * Interface ComponentException
+ * Interface HtmlTemplateInterface
  *
- * @package CodeInc\UI\Component\Exceptions
+ * @package CodeInc\UI\Library\Templates
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-interface ComponentException extends \Throwable
+interface HtmlTemplateInterface extends TemplateInterface
 {
     /**
-     * Returns the component which threw the exception.
+     * Returns the object in charge of managing the HTML headers.
      *
-     * @return ComponentInterface
+     * @return HtmlHeaders
      */
-    public function getComponent():ComponentInterface;
+    public function getHeaders():HtmlHeaders;
 }

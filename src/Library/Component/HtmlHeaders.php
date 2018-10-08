@@ -19,15 +19,14 @@
 // Project:  UI
 //
 declare(strict_types=1);
-namespace CodeInc\UI\Component\Library;
-use CodeInc\UI\Component\ComponentInterface;
-use CodeInc\UI\Component\Exceptions\ComponentRuntimeException;
+namespace CodeInc\UI\Library\Component;
+use CodeInc\UI\ComponentInterface;
 
 
 /**
  * Class HtmlHeaders
  *
- * @package CodeInc\UI\Component\Library
+ * @package CodeInc\UI\Library\Component
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
 class HtmlHeaders implements \IteratorAggregate, \Countable, ComponentInterface
@@ -68,7 +67,7 @@ class HtmlHeaders implements \IteratorAggregate, \Countable, ComponentInterface
     {
         foreach ($headers as $header) {
             if (!is_string($header)) {
-                throw new ComponentRuntimeException($this,
+                throw new \RuntimeException($this,
                     sprintf("The list item '%s' is not a string an can not be used as an header.",
                         is_object($header) ? get_class($header) : (string)$headers));
             }

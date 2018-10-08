@@ -19,14 +19,14 @@
 // Project:  UI
 //
 declare(strict_types=1);
-namespace CodeInc\UI\Component\Library;
-use CodeInc\UI\Component\ComponentInterface;
+namespace CodeInc\UI\Library\Component;
+use CodeInc\UI\ComponentInterface;
 
 
 /**
  * Class ArrayComponent
  *
- * @package CodeInc\UI\Component\Library
+ * @package CodeInc\UI\Library\Component
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
 class ArrayComponent implements ComponentInterface, \IteratorAggregate

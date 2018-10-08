@@ -19,16 +19,16 @@
 // Time:     15:30
 // Project:  UI
 //
-namespace CodeInc\UI\Templates\Html;
-use CodeInc\UI\Component\ComponentInterface;
-use CodeInc\UI\Component\Library\HtmlHeaders;
-use CodeInc\UI\Component\Library\StringComponent;
+namespace CodeInc\UI\Library\Templates;
+use CodeInc\UI\ComponentInterface;
+use CodeInc\UI\Library\Component\HtmlHeaders;
+use CodeInc\UI\Library\Component\StringComponent;
 
 
 /**
  * Class AbstractHtmlTemplate
  *
- * @package CodeInc\UI\Templates\Html
+ * @package CodeInc\UI\Library\Templates
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
 abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
