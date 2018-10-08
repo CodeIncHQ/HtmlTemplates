@@ -16,46 +16,53 @@
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
 // Date:     20/02/2018
-// Time:     15:31
-// Project:  HtmlTemplates
+// Time:     15:21
+// Project:  UI
 //
-namespace CodeInc\HtmlTemplates;
-use CodeInc\HtmlTemplates\HtmlTemplateInterface;
-use Exception;
-use Throwable;
+namespace CodeInc\UI\Templates\Html;
 
 
 /**
- * Class TemplateException
+ * Class BlankHtmlTemplate
  *
- * @package CodeInc\HtmlTemplates
+ * @package CodeInc\UI\Templates\Html
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class TemplateException extends Exception
+class BlankHtmlTemplate extends AbstractHtmlTemplate
 {
-	/**
-	 * @var HtmlTemplateInterface|null
-	 */
-	private $template;
+    /**
+     * @inheritdoc
+     * @return string
+     */
+	protected function getTemplateHeader():string
+	{
+	    $lang = $this->getLanguage();
+	    ob_start();
+		?>
+		<!DOCTYPE html>
+		<html<?=$lang ? ' lang="'.htmlspecialchars($lang).'"' : ''?>>
+			<head>
+				<meta charset="<?=htmlspecialchars($this->getCharset())?>">
+				<title><?=htmlspecialchars($this->getTitle())?></title>
+				<?=$this->getHeaders()->get()?>
+			</head>
 
-	/**
-	 * TemplateException constructor.
-	 *
-	 * @param string $message
-	 * @param HtmlTemplateInterface|null $template
-	 * @param null|Throwable $previous
-	 */
-	public function __construct(string $message, ?HtmlTemplateInterface $template = null, ?Throwable $previous = null)
-    {
-		$this->template = $template;
-		parent::__construct($message, $previous);
+			<body>
+		<?
+        return ob_get_clean();
 	}
 
-	/**
-	 * @return HtmlTemplateInterface|null
-	 */
-	public function getTemplate():?HtmlTemplateInterface
-    {
-		return $this->template;
+    /**
+     * @inheritdoc
+     * @return string
+     */
+	public function getTemplateFooter():string
+	{
+	    ob_start();
+		?>
+			</body>
+		</html>
+		<?
+        return ob_get_clean();
 	}
 }

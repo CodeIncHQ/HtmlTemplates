@@ -15,75 +15,74 @@
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     27/07/2018
-// Project:  HtmlTemplates
+// Date:     28/09/2018
+// Project:  UI
 //
-
-namespace CodeInc\HtmlTemplates;
+declare(strict_types=1);
+namespace CodeInc\UI\Component\Library;
+use CodeInc\UI\Component\ComponentInterface;
 
 
 /**
- * Class AbstractStringContentHtmlTemplate
+ * Class StringComponent
  *
- * @package CodeInc\HtmlTemplates
+ * @package CodeInc\UI\Component\Library
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-abstract class AbstractStringContentHtmlTemplate extends AbstractHtmlTemplate
+class StringComponent implements ComponentInterface
 {
     /**
-     * Page's content.
-     *
-     * @var string|null
+     * @var string
      */
     private $content;
 
     /**
-     * Return's the header HTML coder
+     * Adds some content.
      *
-     * @return string
-     */
-    abstract protected function getHeader():string;
-
-    /**
-     * Returns the footer HTML code.
-     *
-     * @return string
-     */
-    abstract protected function getFooter():string;
-
-    /**
-     * @inheritdoc
      * @param string $content
      */
-    public function addContent(string $content):void
+    public function add(string $content):void
     {
         $this->content .= $content;
     }
 
     /**
-     * @inheritdoc
+     * Sets or replaces the content.
+     *
      * @param string $content
      */
-    public function setContent(string $content):void
+    public function set(string $content):void
     {
         $this->content = $content;
     }
 
     /**
-     * @inheritdoc
-     * @return null|string
+     * Verifies if the content is empty.
+     *
+     * @return bool
      */
-    public function getContent():?string
+    public function isEmpty():bool
     {
-        return $this->content;
+        return empty($this->content);
     }
 
     /**
-     * @inheritdoc
+     * Returns the content's length.
+     *
+     * @return int
+     */
+    public function length():int
+    {
+        return strlen($this->content);
+    }
+
+    /**
+     * Returns the content as a string.
+     *
      * @return string
      */
-    public function getHtml():string
+    public function get():string
     {
-        return $this->getHeader().$this->getContent().$this->getFooter();
+        return $this->content;
     }
 }
