@@ -54,7 +54,7 @@ abstract class AbstractHtml5Template implements TemplateInterface
     /**
      * @var HtmlHeaders
      */
-    private $htmlHeaders;
+    private $headers;
 
     /**
      * @var string
@@ -68,33 +68,33 @@ abstract class AbstractHtml5Template implements TemplateInterface
      * @param string $language
      * @param string $charset
      * @param string $viewport
-     * @param HtmlHeaders|null $htmlHeaders
+     * @param HtmlHeaders|null $headers
      */
     public function __construct(string $title = '', string $language = self::DEFAULT_LANGUAGE,
         string $charset = self::DEFAULT_CHARSET, string $viewport = self::DEFAULT_VIEWPORT,
-        ?HtmlHeaders $htmlHeaders = null)
+        ?HtmlHeaders $headers = null)
     {
         $this->title = $title;
         $this->language = $language;
         $this->charset = $charset;
         $this->viewport = $viewport;
-        $this->htmlHeaders = $htmlHeaders ?? new HtmlHeaders();
+        $this->headers = $headers ?? new HtmlHeaders();
     }
 
     /**
      * @return HtmlHeaders
      */
-    public function getHtmlHeaders():HtmlHeaders
+    public function getHeaders():HtmlHeaders
     {
-        return $this->htmlHeaders;
+        return $this->headers;
     }
 
     /**
-     * @param HtmlHeaders $htmlHeaders
+     * @param HtmlHeaders $headers
      */
-    public function setHtmlHeaders(HtmlHeaders $htmlHeaders):void
+    public function setHeaders(HtmlHeaders $headers):void
     {
-        $this->htmlHeaders = $htmlHeaders;
+        $this->headers = $headers;
     }
 
     /**
@@ -176,7 +176,7 @@ abstract class AbstractHtml5Template implements TemplateInterface
                 <meta charset="<?=htmlspecialchars($this->charset)?>">
                 <meta name="viewport" content="<?=$this->viewport?>">
                 <title><?=htmlspecialchars($this->title)?></title>
-                <?=$this->htmlHeaders->get()?>
+                <?=$this->headers->get()?>
             </head>
 
             <body>

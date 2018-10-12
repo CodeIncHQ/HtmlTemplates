@@ -54,7 +54,6 @@ class BlankHtml5Template extends AbstractHtml5Template
         $this->content = $content;
     }
 
-
     /**
      * @return string
      */
