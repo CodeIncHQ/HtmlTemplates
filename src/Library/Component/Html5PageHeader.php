@@ -31,6 +31,9 @@ use CodeInc\UI\PrintableComponentInterface;
  */
 class Html5PageHeader implements PrintableComponentInterface
 {
+    public const DEFAULT_CHARSET = 'utf-8';
+    public const DEFAULT_VIEWPORT = 'width=device-width, initial-scale=1, shrink-to-fit=no';
+
     /**
      * @var null|string
      */
@@ -52,19 +55,26 @@ class Html5PageHeader implements PrintableComponentInterface
     private $htmlHeaders;
 
     /**
+     * @var
+     */
+    private $viewport;
+
+    /**
      * Html5PageHeader constructor.
      *
      * @param null|string $title
      * @param string $charset
      * @param null|string $language
+     * @param string $viewport
      * @param HtmlHeaders|null $htmlHeaders
      */
-    public function __construct(?string $title = null, string $charset = 'utf-8', ?string $language = null,
-        ?HtmlHeaders $htmlHeaders = null)
+    public function __construct(?string $title = null, string $charset = self::DEFAULT_CHARSET,
+        ?string $language = null, string $viewport = self::DEFAULT_VIEWPORT, ?HtmlHeaders $htmlHeaders = null)
     {
         $this->title = $title;
         $this->charset = $charset;
         $this->language = $language;
+        $this->viewport = $viewport;
         $this->htmlHeaders = $htmlHeaders ?? new HtmlHeaders();
     }
 
@@ -136,7 +146,7 @@ class Html5PageHeader implements PrintableComponentInterface
         <html<?=$this->language ? ' lang="'.htmlspecialchars($this->language).'"' : ''?>>
             <head>
                 <meta charset="<?=htmlspecialchars($this->getCharset())?>">
-                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <meta name="viewport" content="<?=$this->viewport?>">
                 <title><?=htmlspecialchars($this->title)?></title>
                 <?=$this->getHtmlHeaders()->get()?>
             </head>

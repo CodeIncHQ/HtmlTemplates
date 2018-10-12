@@ -21,8 +21,8 @@
 //
 namespace CodeInc\UI\Library\Templates;
 use CodeInc\UI\Library\Component\Html5PageFooter;
-use CodeInc\UI\Library\Component\HtmlHeaders;
-use CodeInc\UI\Library\Component\StringComponent;
+use CodeInc\UI\Library\Component\Html5PageHeader;
+use CodeInc\UI\TemplateInterface;
 
 
 /**
@@ -31,133 +31,78 @@ use CodeInc\UI\Library\Component\StringComponent;
  * @package CodeInc\UI\Library\Templates
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class BlankHtml5Template extends AbstractHtmlTemplate
+class BlankHtml5Template implements TemplateInterface
 {
     /**
-     * Page's title
-     *
-     * @var string|null
+     * @var Html5PageHeader
      */
-    protected $title;
+    protected $pageHeader;
 
     /**
-     * Page's charset
-     *
+     * @var Html5PageFooter
+     */
+    protected $pageFooter;
+
+    /**
      * @var string
-     */
-    protected $charset;
-
-    /**
-     * <html> tag language
-     *
-     * @var string|null
-     */
-    protected $language;
-
-    /**
-     * Page's content.
-     *
-     * @var StringComponent|null
-     * @see BlankHtml5Template::getContent()
      */
     protected $content;
 
     /**
-     * HTML headers.
-     *
-     * @var HtmlHeaders
-     */
-    protected $headers;
-
-    /**
      * AbstractHtmlTemplate constructor.
      *
-     * @param null|string $title
-     * @param HtmlHeaders|null $headers
-     * @param string $charset
-     * @param null|string $language
+     * @param string $content
+     * @param Html5PageHeader|null $pageHeader
+     * @param Html5PageFooter|null $pageFooter
      */
-    public function __construct(?string $title = null, ?HtmlHeaders $headers = null,
-        string $charset = 'utf-8', ?string $language = null)
+    public function __construct(string $content = '', ?Html5PageHeader $pageHeader = null,
+        ?Html5PageFooter $pageFooter = null)
     {
-        parent::__construct($headers);
-        $this->title = $title;
-        $this->charset = $charset;
-        $this->language = $language;
-        $this->content = new StringComponent();
+        $this->content = $content;
+        $this->pageHeader = $pageHeader ?? new Html5PageHeader();
+        $this->pageFooter = $pageFooter ?? new Html5PageFooter();
     }
 
+
     /**
-     * Returns the page's content.
-     *
-     * @return StringComponent
+     * @return string
      */
-    public function getContent():StringComponent
+    public function getContent():string
     {
         return $this->content;
     }
 
     /**
-     * Returns the page's title.
-     *
-     * @return null|string
+     * @param string $content
      */
-    public function getTitle():?string
+    public function setContent(string $content):void
     {
-        return $this->title;
+        $this->content = $content;
     }
 
     /**
-     * Returns the page's charset.
-     *
-     * @return string
+     * @param string $extraContent
      */
-    public function getCharset():string
+    public function addContent(string $extraContent):void
     {
-        return $this->charset;
+        $this->content .= $extraContent;
     }
 
     /**
-     * Returns the page's language or NULL if not set.
-     *
-     * @return null|string
+     * @return Html5PageHeader
      */
-    public function getLanguage():?string
+    public function getPageHeader():Html5PageHeader
     {
-        return $this->language;
+        return $this->pageHeader;
     }
 
     /**
-     * @inheritdoc
-     * @return string
+     * @return Html5PageFooter
      */
-	protected function getTemplateHeader():string
-	{
-	    $lang = $this->getLanguage();
-	    ob_start();
-		?>
-		<!DOCTYPE html>
-		<html<?=$lang ? ' lang="'.htmlspecialchars($lang).'"' : ''?>>
-			<head>
-				<meta charset="<?=htmlspecialchars($this->getCharset())?>">
-                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                <title><?=htmlspecialchars($this->getTitle())?></title>
-				<?=$this->getHeaders()->get()?>
-			</head>
-
-			<body>
-		<?
-        return ob_get_clean();
-	}
-
-    /**
-     * @inheritdoc
-     * @return string
-     */
-	protected function getTemplateFooter():string
-	{
-	    return (string)new Html5PageFooter();
-	}
+    public function getPageFooter():Html5PageFooter
+    {
+        return $this->pageFooter;
+    }
 
     /**
      * @inheritdoc
@@ -165,8 +110,6 @@ class BlankHtml5Template extends AbstractHtmlTemplate
      */
     public function get():string
     {
-        return $this->getTemplateHeader()
-            .$this->getContent()->get()
-            .$this->getTemplateFooter();
+        return (string)$this->pageHeader.$this->content.(string)$this->pageFooter;
     }
 }

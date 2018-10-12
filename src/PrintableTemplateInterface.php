@@ -15,45 +15,21 @@
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     20/02/2018
-// Time:     15:30
+// Date:     12/10/2018
 // Project:  UI
 //
-namespace CodeInc\UI\Library\Templates;
-use CodeInc\UI\Library\Component\HtmlHeaders;
+declare(strict_types=1);
+namespace CodeInc\UI;
+use CodeInc\PrintableInterface\PrintableInterface;
 
 
 /**
- * Class AbstractHtmlTemplate
+ * Interface PrintableTemplateInterface
  *
- * @package CodeInc\UI\Library\Templates
+ * @package CodeInc\UI
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-abstract class AbstractHtmlTemplate implements HtmlTemplateInterface
+interface PrintableTemplateInterface extends TemplateInterface, PrintableInterface
 {
-    /**
-     * HTML headers.
-     *
-     * @var HtmlHeaders
-     */
-    protected $headers;
 
-    /**
-     * AbstractHtmlTemplate constructor.
-     *
-     * @param HtmlHeaders|null $headers
-     */
-	public function __construct(?HtmlHeaders $headers = null)
-    {
-        $this->headers = $headers ?? new HtmlHeaders();
-    }
-
-    /**
-     * @inheritdoc
-     * @return HtmlHeaders
-     */
-    public function getHeaders():HtmlHeaders
-    {
-        return $this->headers;
-    }
 }
