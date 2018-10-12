@@ -32,10 +32,11 @@ use CodeInc\UI\ComponentInterface;
 class Html5PageHeader implements ComponentInterface
 {
     public const DEFAULT_CHARSET = 'utf-8';
+    public const DEFAULT_LANGUAGE = 'en';
     public const DEFAULT_VIEWPORT = 'width=device-width, initial-scale=1, shrink-to-fit=no';
 
     /**
-     * @var null|string
+     * @var string
      */
     private $title;
 
@@ -45,12 +46,12 @@ class Html5PageHeader implements ComponentInterface
     private $charset;
 
     /**
-     * @var string|null
+     * @var string
      */
     private $language;
 
     /**
-     * @var HtmlHeaders|null
+     * @var HtmlHeaders
      */
     private $htmlHeaders;
 
@@ -68,8 +69,9 @@ class Html5PageHeader implements ComponentInterface
      * @param string $viewport
      * @param HtmlHeaders|null $htmlHeaders
      */
-    public function __construct(?string $title = null, string $charset = self::DEFAULT_CHARSET,
-        ?string $language = null, string $viewport = self::DEFAULT_VIEWPORT, ?HtmlHeaders $htmlHeaders = null)
+    public function __construct(string $title = '', string $charset = self::DEFAULT_CHARSET,
+        string $language = self::DEFAULT_LANGUAGE, string $viewport = self::DEFAULT_VIEWPORT,
+        ?HtmlHeaders $htmlHeaders = null)
     {
         $this->title = $title;
         $this->charset = $charset;
@@ -79,17 +81,17 @@ class Html5PageHeader implements ComponentInterface
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getTitle():?string
+    public function getTitle():string
     {
         return $this->title;
     }
 
     /**
-     * @param null|string $title
+     * @param string $title
      */
-    public function setTitle(?string $title):void
+    public function setTitle(string $title):void
     {
         $this->title = $title;
     }
@@ -143,7 +145,7 @@ class Html5PageHeader implements ComponentInterface
         ob_start();
         ?>
         <!DOCTYPE html>
-        <html<?=$this->language ? ' lang="'.htmlspecialchars($this->language).'"' : ''?>>
+        <html lang="<?=htmlspecialchars($this->language)?>">
             <head>
                 <meta charset="<?=htmlspecialchars($this->getCharset())?>">
                 <meta name="viewport" content="<?=$this->viewport?>">
