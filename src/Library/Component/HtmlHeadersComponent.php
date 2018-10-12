@@ -39,42 +39,31 @@ class HtmlHeadersComponent implements \IteratorAggregate, \Countable, ComponentI
     /**
      * HtmlHeadersComponent constructor.
      *
-     * @param iterable|null $headers
+     * @param string|string[]|iterable|null $headers
      */
-    public function __construct(?iterable $headers = null)
+    public function __construct($headers = null)
     {
         if ($headers !== null) {
-            $this->addHeaders($headers);
+            $this->add($headers);
         }
     }
 
     /**
-     * Adds an header.
+     * Adds one or more headers.
      *
-     * @param string $header
+     * @param string|string[]|iterable $header
      */
-    public function addHeader(string $header):void
+    public function add($header):void
     {
-        $this->headers[] = $header;
-    }
-
-    /**
-     * Adds multiple headers.
-     *
-     * @param iterable $headers
-     */
-    public function addHeaders(iterable $headers):void
-    {
-        foreach ($headers as $header) {
-            if (!is_string($header)) {
-                throw new \RuntimeException($this,
-                    sprintf("The list item '%s' is not a string an can not be used as an header.",
-                        is_object($header) ? get_class($header) : (string)$headers));
+        if (is_iterable($header)) {
+            foreach ($header as $item) {
+                $this->headers[] = (string)$item;
             }
-            $this->addHeader($header);
+        }
+        else {
+            $this->headers[] = (string)$header;
         }
     }
-
 
     /**
      * Adds a CSS link to the <head> tag.
@@ -83,9 +72,9 @@ class HtmlHeadersComponent implements \IteratorAggregate, \Countable, ComponentI
      * @param string $type
      * @param string $rel
      */
-    public function addCssHeader(string $url, string $type = 'text/css', string $rel = 'stylesheet'):void
+    public function addCss(string $url, string $type = 'text/css', string $rel = 'stylesheet'):void
     {
-        $this->addHeader(
+        $this->add(
             '<link rel="'.htmlspecialchars($rel)
             .'" type="'.htmlspecialchars($type)
             .'" href="'.htmlspecialchars($url).'">'
@@ -98,9 +87,9 @@ class HtmlHeadersComponent implements \IteratorAggregate, \Countable, ComponentI
      * @param string $css
      * @param string $type
      */
-    public function addInlineCssHeader(string $css, string $type = 'text/css'):void
+    public function addInlineCss(string $css, string $type = 'text/css'):void
     {
-        $this->addHeader(
+        $this->add(
             '<style type="'.htmlspecialchars($type).'">'.$css.'</style>'
         );
     }
@@ -112,7 +101,7 @@ class HtmlHeadersComponent implements \IteratorAggregate, \Countable, ComponentI
      * @param string|null $integrity
      * @param string|null $crossOrigin
      */
-    public function addJsHeader(string $url, ?string $integrity = null, ?string $crossOrigin = null):void
+    public function addJs(string $url, ?string $integrity = null, ?string $crossOrigin = null):void
     {
         $header = '<script src="'.htmlspecialchars($url).'"';
         if ($integrity) {
@@ -122,7 +111,7 @@ class HtmlHeadersComponent implements \IteratorAggregate, \Countable, ComponentI
             $header .= ' crossorigin="'.htmlspecialchars($crossOrigin).'"';
         }
         $header .= '></script>';
-        $this->addHeader($header);
+        $this->add($header);
     }
 
     /**
@@ -130,9 +119,9 @@ class HtmlHeadersComponent implements \IteratorAggregate, \Countable, ComponentI
      *
      * @param string $js
      */
-    public function addInlineJsHeader(string $js):void
+    public function addInlineJs(string $js):void
     {
-        $this->addHeader('<script>'.$js.'</script>');
+        $this->add('<script>'.$js.'</script>');
     }
 
     /**
@@ -149,7 +138,6 @@ class HtmlHeadersComponent implements \IteratorAggregate, \Countable, ComponentI
      * Returns all the headers as a string.
      *
      * @inheritdoc
-     * @uses HtmlHeadersComponent::getAsString()
      * @return string
      */
     public function get(string $glue = "\n"):string
