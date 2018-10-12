@@ -110,6 +110,8 @@ class BlankHtml5Template implements TemplateInterface
      */
     public function get():string
     {
-        return (string)$this->pageHeader.$this->content.(string)$this->pageFooter;
+        return $this->pageHeader->get()
+            .$this->content
+            .$this->pageFooter->get();
     }
 }
