@@ -132,7 +132,8 @@ class BlankHtml5Template extends AbstractHtmlTemplate
 		<html<?=$lang ? ' lang="'.htmlspecialchars($lang).'"' : ''?>>
 			<head>
 				<meta charset="<?=htmlspecialchars($this->getCharset())?>">
-				<title><?=htmlspecialchars($this->getPageTitle())?></title>
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <title><?=htmlspecialchars($this->getPageTitle())?></title>
 				<?=$this->getHeaders()->get()?>
 			</head>
 
