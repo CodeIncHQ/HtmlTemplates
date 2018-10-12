@@ -47,6 +47,7 @@ class Html5PageFooter implements PrintableComponentInterface
 
     /**
      * @inheritdoc
+     * @uses Html5PageFooter::get()
      * @see http://php.net/manual/language.oop5.magic.php#object.tostring
      * @return string
      */
