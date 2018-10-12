@@ -20,7 +20,7 @@
 //
 declare(strict_types=1);
 namespace CodeInc\UI\Library\Component;
-use CodeInc\UI\PrintableComponentInterface;
+use CodeInc\UI\ComponentInterface;
 
 
 /**
@@ -29,7 +29,7 @@ use CodeInc\UI\PrintableComponentInterface;
  * @package CodeInc\UI\Library\Component
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class Html5PageFooter implements PrintableComponentInterface
+class Html5PageFooter implements ComponentInterface
 {
     /**
      * @inheritdoc
@@ -43,16 +43,5 @@ class Html5PageFooter implements PrintableComponentInterface
         </html>
         <?
         return ob_get_clean();
-    }
-
-    /**
-     * @inheritdoc
-     * @uses Html5PageFooter::get()
-     * @see http://php.net/manual/language.oop5.magic.php#object.tostring
-     * @return string
-     */
-    public function __toString():string
-    {
-        return $this->get();
     }
 }
