@@ -20,7 +20,8 @@
 // Project:  UI
 //
 namespace CodeInc\UI\Library\Templates;
-use CodeInc\UI\Library\Component\HtmlHeadersComponent;
+use CodeInc\UI\Library\Component\Html5PageFooter;
+use CodeInc\UI\Library\Component\HtmlHeaders;
 use CodeInc\UI\Library\Component\StringComponent;
 
 
@@ -37,7 +38,7 @@ class BlankHtml5Template extends AbstractHtmlTemplate
      *
      * @var string|null
      */
-    protected $pageTitle;
+    protected $title;
 
     /**
      * Page's charset
@@ -62,18 +63,25 @@ class BlankHtml5Template extends AbstractHtmlTemplate
     protected $content;
 
     /**
+     * HTML headers.
+     *
+     * @var HtmlHeaders
+     */
+    protected $headers;
+
+    /**
      * AbstractHtmlTemplate constructor.
      *
-     * @param null|string $pageTitle
-     * @param HtmlHeadersComponent|null $headers
+     * @param null|string $title
+     * @param HtmlHeaders|null $headers
      * @param string $charset
      * @param null|string $language
      */
-    public function __construct(?string $pageTitle = null, ?HtmlHeadersComponent $headers = null,
+    public function __construct(?string $title = null, ?HtmlHeaders $headers = null,
         string $charset = 'utf-8', ?string $language = null)
     {
         parent::__construct($headers);
-        $this->pageTitle = $pageTitle;
+        $this->title = $title;
         $this->charset = $charset;
         $this->language = $language;
         $this->content = new StringComponent();
@@ -94,9 +102,9 @@ class BlankHtml5Template extends AbstractHtmlTemplate
      *
      * @return null|string
      */
-    public function getPageTitle():?string
+    public function getTitle():?string
     {
-        return $this->pageTitle;
+        return $this->title;
     }
 
     /**
@@ -133,7 +141,7 @@ class BlankHtml5Template extends AbstractHtmlTemplate
 			<head>
 				<meta charset="<?=htmlspecialchars($this->getCharset())?>">
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                <title><?=htmlspecialchars($this->getPageTitle())?></title>
+                <title><?=htmlspecialchars($this->getTitle())?></title>
 				<?=$this->getHeaders()->get()?>
 			</head>
 
@@ -148,12 +156,7 @@ class BlankHtml5Template extends AbstractHtmlTemplate
      */
 	protected function getTemplateFooter():string
 	{
-	    ob_start();
-		?>
-			</body>
-		</html>
-		<?
-        return ob_get_clean();
+	    return (string)new Html5PageFooter();
 	}
 
     /**

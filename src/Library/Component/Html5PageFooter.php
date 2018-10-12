@@ -15,99 +15,43 @@
 // +---------------------------------------------------------------------+
 //
 // Author:   Joan Fabrégat <joan@codeinc.fr>
-// Date:     08/10/2018
+// Date:     12/10/2018
 // Project:  UI
 //
 declare(strict_types=1);
 namespace CodeInc\UI\Library\Component;
-use CodeInc\UI\ComponentInterface;
+use CodeInc\UI\PrintableComponentInterface;
 
 
 /**
- * Class ArrayComponent
+ * Class Html5PageFooter
  *
  * @package CodeInc\UI\Library\Component
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class ArrayComponent implements ComponentInterface, \IteratorAggregate
+class Html5PageFooter implements PrintableComponentInterface
 {
-    /**
-     * @var array
-     */
-    private $array;
-
-    /**
-     * @var string
-     */
-    private $glue;
-
-    /**
-     * ArrayComponent constructor.
-     *
-     * @param string $glue
-     * @param array|null $array
-     */
-    public function __construct(string $glue, ?array $array = [])
-    {
-        $this->array = $array;
-        $this->glue = $glue;
-    }
-
-    /**
-     * @param string $glue
-     */
-    public function setGlue(string $glue):void
-    {
-        $this->glue = $glue;
-    }
-
-    /**
-     * @return string
-     */
-    public function getGlue():string
-    {
-        return $this->glue;
-    }
-
-    /**
-     * @return array|null
-     */
-    public function getArray():?array
-    {
-        return $this->array;
-    }
-
-    /**
-     * @param array|null $array
-     */
-    public function setArray(?array $array):void
-    {
-        $this->array = $array;
-    }
-
-    /**
-     * @param string $item
-     */
-    public function addEntry(string $item):void
-    {
-        $this->array[] = $item;
-    }
-
     /**
      * @inheritdoc
      * @return string
      */
     public function get():string
     {
-        return implode($this->glue, $this->array);
+        ob_start();
+        ?>
+            </body>
+        </html>
+        <?
+        return ob_get_clean();
     }
 
     /**
      * @inheritdoc
-     * @return \ArrayIterator
+     * @see http://php.net/manual/language.oop5.magic.php#object.tostring
+     * @return string
      */
-    public function getIterator():\ArrayIterator
+    public function __toString():string
     {
-        return new \ArrayIterator($this->array);
+        return $this->get();
     }
 }

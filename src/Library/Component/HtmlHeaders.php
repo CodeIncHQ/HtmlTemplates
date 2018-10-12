@@ -29,7 +29,7 @@ use CodeInc\UI\ComponentInterface;
  * @package CodeInc\UI\Library\Component
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class HtmlHeadersComponent implements \IteratorAggregate, \Countable, ComponentInterface
+class HtmlHeaders implements \IteratorAggregate, \Countable, ComponentInterface
 {
     /**
      * @var array
