@@ -21,7 +21,6 @@
 //
 namespace CodeInc\UI\Library\Templates;
 use CodeInc\UI\Library\Component\HtmlHeaders;
-use CodeInc\UI\TemplateInterface;
 
 
 /**
@@ -30,7 +29,7 @@ use CodeInc\UI\TemplateInterface;
  * @package CodeInc\UI\Library\Templates
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-abstract class AbstractHtml5Template implements TemplateInterface
+abstract class AbstractHtml5Template implements HtmlTemplateInterface
 {
     public const DEFAULT_CHARSET = 'utf-8';
     public const DEFAULT_LANGUAGE = 'en';
@@ -82,6 +81,7 @@ abstract class AbstractHtml5Template implements TemplateInterface
     }
 
     /**
+     * @inheritdoc
      * @return HtmlHeaders
      */
     public function getHeaders():HtmlHeaders
