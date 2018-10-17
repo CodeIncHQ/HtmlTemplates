@@ -19,15 +19,15 @@
 // Project:  UI
 //
 declare(strict_types=1);
-namespace CodeInc\UI\Library\Templates;
+namespace CodeInc\UI\Library\Templates\Html;
 use CodeInc\UI\Library\Component\HtmlHeaders;
 use CodeInc\UI\TemplateInterface;
 
 
 /**
- * Class HtmlTemplateInterface
+ * Interface HtmlTemplateInterface
  *
- * @package CodeInc\UI\Library\Templates
+ * @package CodeInc\UI\Library\Templates\Html
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
 interface HtmlTemplateInterface extends TemplateInterface

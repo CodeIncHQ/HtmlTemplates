@@ -19,14 +19,14 @@
 // Time:     15:21
 // Project:  UI
 //
-namespace CodeInc\UI\Library\Templates;
+namespace CodeInc\UI\Library\Templates\Html;
 use CodeInc\UI\Library\Component\HtmlHeaders;
 
 
 /**
- * Class BlankHtml5Template
+ * Class AbstractHtml5Template
  *
- * @package CodeInc\UI\Library\Templates
+ * @package CodeInc\UI\Library\Templates\Html
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
 abstract class AbstractHtml5Template implements HtmlTemplateInterface
