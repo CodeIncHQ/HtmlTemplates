@@ -52,8 +52,9 @@ class HtmlHeaders implements \IteratorAggregate, \Countable, ComponentInterface
      * Adds one or more headers.
      *
      * @param string|string[]|iterable $header
+     * @return HtmlHeaders
      */
-    public function add($header):void
+    public function add($header):self
     {
         if (is_iterable($header)) {
             foreach ($header as $item) {
@@ -63,6 +64,7 @@ class HtmlHeaders implements \IteratorAggregate, \Countable, ComponentInterface
         else {
             $this->headers[] = (string)$header;
         }
+        return $this;
     }
 
     /**
@@ -71,14 +73,16 @@ class HtmlHeaders implements \IteratorAggregate, \Countable, ComponentInterface
      * @param string $url
      * @param string $type
      * @param string $rel
+     * @return HtmlHeaders
      */
-    public function addCss(string $url, string $type = 'text/css', string $rel = 'stylesheet'):void
+    public function addCss(string $url, string $type = 'text/css', string $rel = 'stylesheet'):self
     {
         $this->add(
             '<link rel="'.htmlspecialchars($rel)
             .'" type="'.htmlspecialchars($type)
             .'" href="'.htmlspecialchars($url).'">'
         );
+        return $this;
     }
 
     /**
@@ -86,12 +90,14 @@ class HtmlHeaders implements \IteratorAggregate, \Countable, ComponentInterface
      *
      * @param string $css
      * @param string $type
+     * @return HtmlHeaders
      */
-    public function addInlineCss(string $css, string $type = 'text/css'):void
+    public function addInlineCss(string $css, string $type = 'text/css'):self
     {
         $this->add(
             '<style type="'.htmlspecialchars($type).'">'.$css.'</style>'
         );
+        return $this;
     }
 
     /**
@@ -100,8 +106,9 @@ class HtmlHeaders implements \IteratorAggregate, \Countable, ComponentInterface
      * @param string $url
      * @param string|null $integrity
      * @param string|null $crossOrigin
+     * @return HtmlHeaders
      */
-    public function addJs(string $url, ?string $integrity = null, ?string $crossOrigin = null):void
+    public function addJs(string $url, ?string $integrity = null, ?string $crossOrigin = null):self
     {
         $header = '<script src="'.htmlspecialchars($url).'"';
         if ($integrity) {
@@ -112,16 +119,19 @@ class HtmlHeaders implements \IteratorAggregate, \Countable, ComponentInterface
         }
         $header .= '></script>';
         $this->add($header);
+        return $this;
     }
 
     /**
      * Adds inline JS code to the <head> tag.
      *
      * @param string $js
+     * @return HtmlHeaders
      */
-    public function addInlineJs(string $js):void
+    public function addInlineJs(string $js):self
     {
         $this->add('<script>'.$js.'</script>');
+        return $this;
     }
 
     /**
