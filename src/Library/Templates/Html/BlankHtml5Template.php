@@ -85,7 +85,7 @@ class BlankHtml5Template extends AbstractHtml5Template
     public function get():string
     {
         return $this->getHeader()
-            .$this->content
+            .$this->getContent()
             .$this->getFooter();
     }
 }
